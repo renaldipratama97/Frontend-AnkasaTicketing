@@ -48,13 +48,14 @@ export default {
     height: 25px;
 }
 
-.boxlogo h1{
+.boxlogo h1 {
     font-size: 25px;
     padding-left: 10px;
 }
 
 .boxsearch {
     position: relative;
+    padding-left: 20px;
 }
 
 .search {
@@ -68,7 +69,7 @@ export default {
 
 .iconsearch {
     position: absolute;
-    left: 20px;
+    left: 40px;
     top: 15px;
 }
 
@@ -132,5 +133,31 @@ export default {
     height: auto;
     border: 2px solid #2395FF;
     border-radius: 30px;
+}
+
+@media (max-width: 1074px) {
+    .boxlink {
+        display: none;
+    }
+}
+
+@media (max-width: 815px) {
+    .boxnotif {
+        display: none;
+    }
+    .boxsearch {
+        position: relative;
+        padding-left: 0px;
+    }
+
+    .iconsearch {
+        left: 20px;
+    }
+}
+
+@media (max-width: 750px) {
+    .boxprofile {
+        display: none;
+    }
 }
 </style>
