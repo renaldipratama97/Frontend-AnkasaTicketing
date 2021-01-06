@@ -6,8 +6,12 @@
     </div>
 
     <div class="form-box">
-        <h1>Login</h1>
+        <h1>Register</h1>
         <form>
+            <div class="form-group">
+                <input type="email" v-model.trim="$v.fullName.$model" :class="{ 'is-invalid': validationStatus($v.fullName) }" class="form-control" placeholder="Full Name">
+                <div class="invalid-feedback" v-if="!$v.fullName.required">Field is required.</div>
+            </div>
             <div class="form-group">
                 <input type="email" v-model.trim="$v.email.$model" :class="{ 'is-invalid': validationStatus($v.email) }" class="form-control" placeholder="Email">
                 <div class="invalid-feedback" v-if="!$v.email.required">Field is required.</div>
@@ -20,17 +24,16 @@
                 <div class="invalid-feedback" v-if="!$v.password.minLength">Field must have at least {{ $v.password.$params.minLength.min }} characters.</div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn-login" @click.prevent="goLogin">Sign In</button>
+                <button type="submit" class="btn-register" @click.prevent="goRegister">Sign Up</button>
             </div>
             <div class="form-group">
-                <p class="forgot-password">Did you forgot your password?</p>
-                <p class="reset-password">Tap here for reset</p>
-                <hr>
-                <h5>or sign in with</h5>
-                <div class="button-group">
-                    <button type="submit" class="btn-google"><img src="../../assets/google.png" alt="google logo"></button>
-                    <button type="submit" class="btn-facebook"><img src="../../assets/facebook.png" alt="facebook logo"></button>
+                <div class="item-checkbox">
+                    <input type="checkbox">
+                    <p>Accept terms and condition</p>
                 </div>
+                <hr>
+                <h5>Already have an account?</h5>
+                <button type="submit" class="btn-login" @click.prevent="goLogin">Sign In</button>
             </div>
         </form>
     </div>
@@ -41,14 +44,16 @@
 import { mapMutations } from 'vuex'
 import { required, minLength, email } from 'vuelidate/lib/validators'
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
+      fullName: '',
       email: '',
       password: ''
     }
   },
   validations: {
+    fullName: { required },
     email: { required, email },
     password: { required, minLength: minLength(6) }
   },
@@ -56,10 +61,13 @@ export default {
     validationStatus (validation) {
       return typeof validation !== 'undefined' ? validation.$error : false
     },
-    goLogin () {
+    goRegister () {
       this.$v.$touch()
       if (this.$v.$pendding || this.$v.$error) return
       console.log('coba')
+    },
+    goLogin () {
+      this.$router.push('/auth/login')
     },
     ...mapMutations(['togglePassword'])
   }
@@ -128,7 +136,7 @@ export default {
 
 .form-box form .form-group .toggle-password {
     position: absolute;
-    top: 180px;
+    top: 259px;
     right: 0;
     opacity: 0;
 }
@@ -150,21 +158,31 @@ export default {
     outline: none;
 }
 
-.form-box form .form-group .forgot-password {
+.form-box form .btn-login {
+    border: 1px solid #2395FF;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 27px;
+    color: #2395FF;
+    background: none;
+    box-shadow: none;
+}
+
+.form-box form .form-group .item-checkbox {
+    display: flex;
+}
+
+.form-box form .form-group .item-checkbox input {
+    margin-top: 5px;
+}
+
+.form-box form .form-group .item-checkbox p {
     font-size: 16px;
     line-height: 19px;
     color: #595959;
     font-family: 'Lato', sans-serif;
-    text-align: center;
-}
-
-.form-box form .form-group .reset-password {
-    font-size: 16px;
-    line-height: 19px;
-    text-decoration-line: underline;
-    color: #2395FF;
-    font-family: 'Lato', sans-serif;
-    text-align: center;
+    margin-left: 15px;
 }
 
 .form-box form .form-group hr {
@@ -176,22 +194,7 @@ export default {
     line-height: 17px;
     text-align: center;
     color: #4D4D4D;
-}
-
-.form-box form .form-group .button-group {
-    display: flex;
-    margin-top: 30px;
-}
-
-.form-box form .form-group .button-group .btn-google,
-.form-box form .form-group .button-group .btn-facebook {
-    width: 95px;
-    height: 52px;
-    border: 1px solid #2395FF;
-    box-sizing: border-box;
-    border-radius: 6px;
-    background: none;
-    margin: 10px auto;
+    margin-bottom: 30px;
 }
 
 @media (max-width: 1085px) {
