@@ -14,26 +14,51 @@
                 <a class="mybooking" href="#">My Booking</a>
             </div>
             <div class="boxnotif">
-                <img class="message" src="../../assets/iconmessage.png" alt="image3">
-                <img class="bell" src="../../assets/bell.png" alt="image4">
+                <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
+                <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
             <div class="boxprofile">
-                <img class="photo" src="../../assets/profile.png" alt="image5">
+                <a href="#"><img class="photo" src="../../assets/profile.png" alt="image4"></a>
+            </div>
+            <div class="slide">
+            <Slide right id="bm-burger-button">
+                <a id="profile" class="profile" href="#"><span>Profile</span></a>
+                <a id="findtickets" class="findtickets" href="#"><span>Find Ticket</span></a>
+                <a id="mybookings" class="mybookings" href="#"><span>My Booking</span></a>
+                <a id="messages" class="messages" href="#"><span>Message</span></a>
+                <a id="notification" class="notification" href="#"><span>Notification</span></a>
+            </Slide>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { Slide } from 'vue-burger-menu'
+
 export default {
-  name: 'Header'
+  name: 'Header',
+  components: {
+    Slide // Register your component
+  }
 }
 </script>
 
 <style scoped>
+.slide {
+    display: none;
+}
+
+#bm-burger-button {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+
 .header {
     display: flex;
     justify-content: space-around;
+    position: relative;
     align-items: center;
     padding: 30px;
 }
@@ -139,9 +164,18 @@ export default {
     .boxlink {
         display: none;
     }
+    .boxprofile {
+        display: none;
+    }
+    .slide {
+        display: flex;
+    }
 }
 
 @media (max-width: 815px) {
+    .header {
+        padding: 30px 10px;
+    }
     .boxnotif {
         display: none;
     }
@@ -149,15 +183,24 @@ export default {
         position: relative;
         padding-left: 0px;
     }
-
     .iconsearch {
         left: 20px;
+    }
+    #bm-burger-button {
+        position: absolute;
+        top: 5px;
+        right: 0px;
     }
 }
 
 @media (max-width: 750px) {
     .boxsearch {
         display: none;
+    }
+    #bm-burger-button {
+        position: absolute;
+        top: 0px;
+        right: 0px;
     }
 }
 </style>
