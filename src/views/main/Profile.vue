@@ -428,7 +428,6 @@ export default {
         margin-bottom: 40px;
     }
     .accountsetting {
-        float: left;
         margin: 20px 0;
     }
 }
