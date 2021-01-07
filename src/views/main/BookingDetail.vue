@@ -48,7 +48,8 @@
                             <div class="col-lg-5 barcode">
                                 <div class="vertical"></div>
                                 <div class="qr-code">
-                                    <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue>
+                                    <!-- <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue> -->
+                                    <img src="../../assets/qr-code.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -60,7 +61,6 @@
 </template>
 
 <script>
-import QrcodeVue from 'qrcode.vue'
 export default {
   name: 'BookingDetail',
   data () {
@@ -68,9 +68,6 @@ export default {
       value: 'halo semua',
       size: 200
     }
-  },
-  components: {
-    QrcodeVue
   }
 }
 </script>
