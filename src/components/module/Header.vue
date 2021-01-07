@@ -39,7 +39,7 @@ import { Slide } from 'vue-burger-menu'
 export default {
   name: 'Header',
   components: {
-    Slide // Register your component
+    Slide
   }
 }
 </script>
