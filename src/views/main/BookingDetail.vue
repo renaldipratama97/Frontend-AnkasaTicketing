@@ -7,7 +7,7 @@
                         <h2 class="ml-5">Booking Pass</h2>
                         <img class="option-menu mr-5" src="../../assets/iconOption.png" alt="">
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-10 card-ticket mx-auto mt-3">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12 card-ticket mx-auto mt-3">
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="flight">
@@ -337,6 +337,10 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
 }
 
 @media (max-width: 574px) {
+    main .card-booking-detail {
+        height: 750px;
+    }
+
     main .card-booking-detail .top-text h2 {
         margin-top: -90px;
         margin-left: -10px !important;
@@ -348,22 +352,12 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
 
     main .card-booking-detail .card-ticket {
         margin-top: -10px !important;
+        width: 100%;
     }
 
     main .card-booking-detail .card-ticket .flight {
-        margin-left: 5px;
+        margin-left: 40px;
         display: flex;
-        flex-direction: column;
-    }
-
-    main .card-booking-detail .card-ticket .flight .icon-plane {
-        margin-top: -29px;
-        margin-left: -10px;
-    }
-
-    main .card-booking-detail .card-ticket .flight .to-country {
-        margin-top: -20px;
-        margin-left: 160px;
     }
 
     main .card-booking-detail .card-ticket button {
@@ -373,7 +367,7 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
     main .card-booking-detail .card-ticket .code-class,
     main .card-booking-detail .card-ticket .terminal-gate,
     main .card-booking-detail .card-ticket .departure {
-        margin-left: 5px;
+        margin-left: 40px;
         margin-top: 20px;
     }
 
@@ -387,9 +381,74 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
     }
 }
 
-@media (max-width: 510px) {
-    main .card-booking-detail .card-ticket .terminal-gate {
+@media (max-width: 530px) {
+    main .card-booking-detail .card-ticket .flight {
         margin-left: 20px;
+    }
+
+    main .card-booking-detail .card-ticket .code-class,
+    main .card-booking-detail .card-ticket .terminal-gate,
+    main .card-booking-detail .card-ticket .departure {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 496px) {
+    main .card-booking-detail .card-ticket .flight {
+        margin-left: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    main .card-booking-detail .card-ticket .flight .airplane {
+        margin-top: -30px;
+        margin-left: -20px;
+    }
+
+    main .card-booking-detail .card-ticket .flight .from-country {
+        margin-left: 20px;
+    }
+
+    main .card-booking-detail .card-ticket .flight .icon-plane {
+        margin-left: -20px;
+        margin-top: -25px;
+    }
+
+    main .card-booking-detail .card-ticket .flight .to-country {
+        margin-top: -22px;
+        margin-left: 160px;
+    }
+
+    main .card-booking-detail .card-ticket .code-class,
+    main .card-booking-detail .card-ticket .terminal-gate,
+    main .card-booking-detail .card-ticket .departure {
+        margin-left: 10px;
+    }
+
+    main .card-booking-detail .card-ticket .barcode .qr-code {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 454px) {
+    main .card-booking-detail .card-ticket .code-class,
+    main .card-booking-detail .card-ticket .terminal-gate,
+    main .card-booking-detail .card-ticket .departure {
+        margin-left: 5px;
+    }
+
+    main .card-booking-detail .card-ticket .flight .from-country {
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 442px) {
+    main .card-booking-detail .card-ticket .flight .from-country {
+        margin-left: -10px;
+    }
+
+    main .card-booking-detail .card-ticket .terminal-gate {
+        margin-left: 30px;
     }
 
     main .card-booking-detail .card-ticket .code-class .class,
@@ -398,28 +457,20 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
     }
 }
 
-@media (max-width: 494px) {
-    main .card-booking-detail .card-ticket .flight .icon-plane {
-        margin-left: 10px;
+@media (max-width: 422px) {
+    main .card-booking-detail .card-ticket .terminal-gate {
+        margin-left: 30px;
     }
-}
 
-@media (max-width: 444px) {
-    main .card-booking-detail .card-ticket .flight .from-country {
-        margin-left: 20px;
-    }
-}
-
-@media (max-width: 442px) {
     main .card-booking-detail .card-ticket .code-class .class,
     main .card-booking-detail .card-ticket .terminal-gate .gate {
         margin-left: 30px;
     }
 }
 
-@media (max-width: 410px) {
-    main .card-booking-detail .card-ticket .departure {
-        margin-top: 5px;
+@media (max-width: 398px) {
+    main .card-booking-detail .card-ticket .terminal-gate {
+        margin-left: 30px;
     }
 
     main .card-booking-detail .card-ticket .code-class .class,
@@ -428,23 +479,38 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
     }
 }
 
-@media (max-width: 390px) {
-    main .card-booking-detail .card-ticket .flight .from-country {
+@media (max-width: 373px) {
+    main .card-booking-detail .card-ticket .code-class .class,
+    main .card-booking-detail .card-ticket .terminal-gate .gate {
         margin-left: 10px;
+    }
+}
+
+@media (max-width: 348px) {
+    main .card-booking-detail .card-ticket .flight .from-country {
+        margin-left: -20px;
     }
 
     main .card-booking-detail .card-ticket .flight .to-country {
-        margin-left: 140px;
-    }
-
-    main .card-booking-detail .card-ticket .code-class,
-    main .card-booking-detail .card-ticket .terminal-gate,
-    main .card-booking-detail .card-ticket .departure {
-        margin-left: -5px;
+        margin-left: 100px;
     }
 
     main .card-booking-detail .card-ticket .terminal-gate {
         margin-left: 15px;
+    }
+
+    main .card-booking-detail .card-ticket .terminal-gate .gate {
+        margin-left: 15px;
+    }
+}
+
+@media (max-width: 336px) {
+    main .card-booking-detail .card-ticket .terminal-gate {
+        margin-right: -12px;
+    }
+
+    main .card-booking-detail .card-ticket .terminal-gate .gate {
+        margin-left: 17px;
     }
 }
 
@@ -454,11 +520,11 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
     }
 
     main .card-booking-detail .card-ticket .flight .from-country {
-        margin-left: 5px;
+        margin-left: -20px;
     }
 
     main .card-booking-detail .card-ticket .flight .to-country {
-        margin-left: 120px;
+        margin-left: 100px;
     }
 
     main .card-booking-detail .card-ticket .side-detail-ticket {
@@ -472,12 +538,13 @@ main .card-booking-detail .card-ticket .barcode .qr-code {
         margin-left: 20px;
     }
 
-    main .card-booking-detail .card-ticket .terminal-gate {
-        margin-left: 20px;
+    main .card-booking-detail .card-ticket .code-class .class,
+    main .card-booking-detail .card-ticket .terminal-gate .gate {
+        margin-left: 60px;
     }
 
     main .card-booking-detail .card-ticket .barcode .qr-code {
-        margin-left: -14px;
+        margin-left: 5px;
     }
 }
 </style>
