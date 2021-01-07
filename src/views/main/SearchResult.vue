@@ -363,7 +363,7 @@ export default {
 }
 
 .boxfilter {
-    background-color: silver;
+    background-color: white;
     border-radius: 15px;
 }
 
@@ -484,7 +484,7 @@ input[type="range" i] {
 }
 
 .boxticket {
-    background: silver;
+    background: white;
     padding: 30px;
     border-radius: 15px;
 }
