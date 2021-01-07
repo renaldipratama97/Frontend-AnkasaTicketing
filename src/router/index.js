@@ -4,6 +4,7 @@ import Auth from '../views/auth/Auth.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Main from '../views/main/Main.vue'
+import MyBooking from '../views/main/MyBooking.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
 
@@ -41,6 +42,11 @@ const routes = [
         path: 'profile',
         name: 'Profile',
         component: Profile
+      },
+      {
+        path: 'my-booking',
+        name: 'MyBooking',
+        component: MyBooking
       }
     ]
   }

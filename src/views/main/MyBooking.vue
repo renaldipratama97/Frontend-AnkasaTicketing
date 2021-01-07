@@ -30,41 +30,58 @@
                     </div>
                 </div>
             </div>
-             <div class="col-lg-8">
-                <p class="title1">Profile</p>
-                <p class="title2">Profile</p>
+            <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <p class="title3">Contact</p>
-                        <div class="boxemail">
-                            <label for="email">Email</label><br>
-                            <input id="email" type="email" placeholder="Input your email">
+                    <div class="col-lg-12">
+                        <div class="boxorderhistory">
+                            <p class="title5">My Booking</p>
+                            <div class="boxorderhistory1">
+                                <p class="title6">My Booking</p>
+                                <a class="orderhistory" href="#">Order History</a>
+                            </div>
                         </div>
-                        <div class="boxphonenumber">
-                            <label for="phonenumber">Phone Number</label><br>
-                            <input id="phonenumber" type="number" placeholder="Input your phone number">
-                        </div>
-                        <a class="accountsetting" href="#">Account Settings ></a>
                     </div>
-                    <div class="col-lg-6">
-                        <p class="title4">Biodata</p>
-                        <div class="boxusername">
-                            <label for="username">Username</label><br>
-                            <input id="username" type="text" placeholder="Input your username">
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="boxstatusbooking">
+                            <p class="schedule">Monday, 20 July '20 - 12:33</p>
+                            <div class="bookingticket">
+                                <p class="departurefrom">IDN</p>
+                                <img src="../../assets/airplane-icon.png" alt="image2">
+                                <p class="arriveto">JPN</p>
+                            </div>
+                            <p class="nameairlinescode">Garuda Indonesia, AB-221</p>
+                            <div class="line"></div>
+                            <div class="boxstatusticket">
+                                <div class="statusticket">
+                                    <p class="title7">Status</p>
+                                    <p class="status">Waiting for payment</p>
+                                </div>
+                                <button class="viewdetails">View Details</button>
+                            </div>
                         </div>
-                        <div class="boxcity">
-                            <label for="city">City</label><br>
-                            <input id="city" type="text" placeholder="Input your city">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="boxstatusbooking1">
+                            <p class="schedule1">Monday, 20 July '20 - 12:33</p>
+                            <div class="bookingticket1">
+                                <p class="departurefrom1">IDN</p>
+                                <img src="../../assets/airplane-icon.png" alt="image3">
+                                <p class="arriveto1">JPN</p>
+                            </div>
+                            <p class="nameairlinescode1">Garuda Indonesia, AB-221</p>
+                            <div class="line"></div>
+                            <div class="boxstatusticket1">
+                                <div class="statusticket1">
+                                    <p class="title8">Status</p>
+                                    <p class="status1">Eticket issued</p>
+                                </div>
+                                <button class="viewdetails1">View Details</button>
+                            </div>
                         </div>
-                        <div class="boxaddress">
-                            <label for="address">Address</label><br>
-                            <input id="address" type="text" placeholder="Input your address">
-                        </div>
-                        <div class="boxpostcode">
-                            <label for="postcode">Post Code</label><br>
-                            <input id="postcode" type="text" placeholder="Input your postcode">
-                        </div>
-                        <button class="save">Save</button>
                     </div>
                 </div>
             </div>
@@ -74,7 +91,7 @@
 
 <script>
 export default {
-  name: 'Profile'
+  name: 'MyBooking'
 }
 </script>
 
@@ -310,23 +327,34 @@ export default {
 
 .col-lg-8 {
     height: max-content;
-    background: #FFFFFF;
-    border-radius: 15px;
-    margin-top: 40px;
-    margin-bottom: 130px;
-    padding: 30px;
+    margin-top: 12px;
+    margin-bottom: 110px;
+    padding: 30px 0;
 }
 
-.title1 {
+.boxorderhistory {
+    width: 100%;
+    height: 115px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.boxorderhistory1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title5 {
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 14px;
 
     color: #2395FF;
 }
 
-.title2 {
+.title6 {
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
@@ -335,45 +363,7 @@ export default {
     color: #000000;
 }
 
-.title3 {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    margin-top: 10px;
-
-    color: #000000;
-}
-
-.col-lg-6 label {
-    font-family: Lato;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    margin-top: 10px;
-    padding-left: 5px;
-
-    color: #9B96AB;
-}
-
-.col-lg-6 input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #d2c2ffad;
-    padding: 0px 0px 10px 5px;
-    margin-bottom: 15px;
-    outline: none;
-}
-
-#phonenumber::-webkit-outer-spin-button,
-#phonenumber::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.accountsetting {
-    float: right;
+.orderhistory {
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
@@ -383,61 +373,194 @@ export default {
     color: #2395FF;
 }
 
-.title4 {
+.boxstatusbooking {
+    width: 100%;
+    height: 223px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.boxstatusbooking1 {
+    width: 100%;
+    height: 223px;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.schedule, .schedule1 {
     font-family: Poppins;
     font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    margin-top: 10px;
+    font-weight: normal;
+    font-size: 14px;
 
     color: #000000;
 }
 
-.save {
-    width: 150px;
-    height: 50px;
-    background: #FFFFFF;
-    box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
-    border: none;
-    border-radius: 10px;
+.departurefrom, .arriveto, .departurefrom1, .arriveto1 {
     font-family: Poppins;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #000000;
+}
+
+.bookingticket, .bookingticket1 {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.bookingticket img, .bookingticket1 img  {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.nameairlinescode, .nameairlinescode1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+
+    color: #979797;
+}
+
+.line {
+    border: 1px solid #E6E6E6;
+    margin-bottom: 16px;
+}
+
+.statusticket, .statusticket1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px
+}
+
+.boxstatusticket, .boxstatusticket1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title7, .title8 {
+    margin: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+
+    color: #7A7A7A;
+}
+
+.status {
+    width: 184px;
+    height: 36px;
+    margin: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid none;
+    background: #FF7F23;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.status1 {
+    width: 184px;
+    height: 36px;
+    margin: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid none;
+    background: #4FCF4D;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.viewdetails, .viewdetails1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
     font-size: 16px;
+    line-height: 24px;
+    border: none;
+    background: none;
+    background-image: url('../../assets/arrowdown.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 30px;
     outline: none;
-    float: right;
 
     color: #2395FF;
 }
 
-.save:hover {
-    background: #2395FF;
-    color: #FFFFFF;
-}
-
-.save:focus {
-    background: #2395FF;
-    color: #FFFFFF;
-}
-
 @media (max-width: 768px) {
-    .col-lg-4 {
-        padding: 40px 0 0 0;
+    .boxprofile {
+        display: none;
     }
-    .col-lg-8 {
-        margin-bottom: 40px;
-    }
-    .accountsetting {
-        margin: 20px 0;
-    }
-}
-
-@media (max-width: 425px) {
     .col-lg-4 {
         padding: 0;
     }
     .col-lg-8 {
-        margin-bottom: 0;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+    .boxstatusbooking {
+        margin: 10px 0;
+    }
+    .bookingticket, .bookingticket1 {
+        width: 30%;
+    }
+}
+
+@media (max-width: 575px) {
+    .row {
+        margin: 0;
+    }
+    .viewdetails, .viewdetails1 {
+        display: none;
+    }
+    .boxstatusticket {
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 425px) {
+    .bookingticket, .bookingticket1 {
+        width: 40%;
+    }
+}
+
+@media (max-width: 375px) {
+    .container {
+        padding: 0;
+    }
+    .bookingticket, .bookingticket1 {
+        width: 50%;
+    }
+    .boxorderhistory1 {
+        flex-direction: column;
+    }
+    .title5 {
+        margin: 0;
+    }
+    .title6 {
+        margin: 0;
     }
 }
 </style>
