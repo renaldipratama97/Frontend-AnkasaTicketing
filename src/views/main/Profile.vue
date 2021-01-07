@@ -109,6 +109,7 @@ export default {
     max-height: 100%;
     border: 5px solid white;
     border-radius: 100px;
+    display: block;
 }
 
 .selectphoto {
@@ -180,6 +181,7 @@ export default {
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
+    outline: none;
 
     color: #2395FF;
 }
@@ -360,6 +362,14 @@ export default {
     border-bottom: 1px solid #d2c2ffad;
     padding: 0px 0px 10px 5px;
     margin-bottom: 15px;
+    outline: none;
+}
+
+#phonenumber::-webkit-outer-spin-button,
+#phonenumber::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .accountsetting {
