@@ -9,7 +9,7 @@
         <h1>Register</h1>
         <form>
             <div class="form-group">
-                <input type="email" v-model.trim="$v.fullName.$model" :class="{ 'is-invalid': validationStatus($v.fullName) }" class="form-control" placeholder="Full Name">
+                <input type="text" v-model.trim="$v.fullName.$model" :class="{ 'is-invalid': validationStatus($v.fullName) }" class="form-control" placeholder="Full Name">
                 <div class="invalid-feedback" v-if="!$v.fullName.required">Field is required.</div>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 import { required, minLength, email } from 'vuelidate/lib/validators'
 export default {
   name: 'Register',
@@ -58,13 +58,24 @@ export default {
     password: { required, minLength: minLength(6) }
   },
   methods: {
+    ...mapActions(['register']),
     validationStatus (validation) {
       return typeof validation !== 'undefined' ? validation.$error : false
     },
     goRegister () {
       this.$v.$touch()
       if (this.$v.$pendding || this.$v.$error) return
-      console.log('coba')
+      const payload = {
+        fullName: this.fullName,
+        email: this.email,
+        password: this.password
+      }
+      this.register(payload)
+        .then(() => {
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     goLogin () {
       this.$router.push('/auth/login')
