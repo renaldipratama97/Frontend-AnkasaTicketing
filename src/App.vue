@@ -9,10 +9,11 @@ import { mapActions } from 'vuex'
 export default {
   namw: 'App',
   methods: {
-    ...mapActions(['interceptorResponse'])
+    ...mapActions(['interceptorResponse', 'interceptorRequest'])
   },
   created () {
     this.interceptorResponse()
+    this.interceptorRequest()
   }
 }
 </script>
