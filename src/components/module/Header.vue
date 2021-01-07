@@ -156,7 +156,7 @@ export default {
 }
 
 @media (max-width: 750px) {
-    .boxprofile {
+    .boxsearch {
         display: none;
     }
 }
