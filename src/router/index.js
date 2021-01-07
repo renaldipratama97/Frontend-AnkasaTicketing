@@ -5,6 +5,7 @@ import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Main from '../views/main/Main.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
+import Profile from '../views/main/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
         path: 'booking-detail',
         name: 'BookingDetail',
         component: BookingDetail
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Profile
       }
     ]
   }
