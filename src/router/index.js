@@ -6,6 +6,7 @@ import Register from '../views/auth/Register.vue'
 import Main from '../views/main/Main.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
+import AddSchedule from '../views/main/AddSchedule.vue'
 
 Vue.use(VueRouter)
 
@@ -28,7 +29,7 @@ const routes = [
     ]
   },
   {
-    path: '/customer',
+    path: '/main',
     name: 'Main',
     component: Main,
     children: [
@@ -36,6 +37,11 @@ const routes = [
         path: 'booking-detail',
         name: 'BookingDetail',
         component: BookingDetail
+      },
+      {
+        path: 'admin/add-schedule',
+        name: 'AddSchedule',
+        component: AddSchedule
       },
       {
         path: 'profile',
