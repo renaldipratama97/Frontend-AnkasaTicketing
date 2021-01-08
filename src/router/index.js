@@ -6,6 +6,7 @@ import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Main from '../views/main/Main.vue'
 import MyBooking from '../views/main/MyBooking.vue'
+import SearchResult from '../views/main/SearchResult.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
 
@@ -36,6 +37,12 @@ const routes = [
     name: 'Main',
     component: Main,
     children: [
+      {
+        path: 'search-result',
+        name: 'SearchResult',
+        component: SearchResult,
+        meta: { requiresAuth: true }
+      },
       {
         path: 'booking-detail',
         name: 'BookingDetail',

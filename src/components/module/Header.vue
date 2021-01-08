@@ -18,7 +18,7 @@
                 <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
             <div class="boxprofile">
-                <a href="#"><img class="photo" src="../../assets/profile.png" alt="image4"></a>
+                <router-link to="/main/profile"><img class="photo" src="../../assets/profile.png" alt="image4"></router-link>
             </div>
             <div class="slide">
             <Slide right id="bm-burger-button">
