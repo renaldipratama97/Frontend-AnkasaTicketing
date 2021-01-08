@@ -63,13 +63,13 @@
                         </div>
                         <div class="departure-time">
                             <label>Departure Time</label>
-                            <date-picker name="date" :min="new Date()" v-model.trim="$v.departureTime.$model" :class="{ 'is-invalid': validationStatus($v.departureTime) }" :config="departureTimeOption" class="depTime"></date-picker>
+                            <date-picker name="date" v-model.trim="$v.departureTime.$model" :class="{ 'is-invalid': validationStatus($v.departureTime) }" :config="departureTimeOption" class="depTime"></date-picker>
                             <div class="invalid-feedback" v-if="!$v.departureTime.required">Field is required.</div>
-                            <div class="invalid-feedback" v-if="!$v.departureTime.minValue">min value</div>
                         </div>
                         <div class="arrived-time">
                             <label>Arrived Time</label>
-                            <date-picker name="date" v-model="arrivedTime" :config="departureTimeOption" class="arrTime"></date-picker>
+                            <date-picker name="date" v-model.trim="$v.arrivedTime.$model" :class="{ 'is-invalid': validationStatus($v.arrivedTime) }" :config="departureTimeOption" class="arrTime"></date-picker>
+                            <div class="invalid-feedback" v-if="!$v.arrivedTime.required">Field is required.</div>
                         </div>
                         <div class="price">
                             <label>Price</label>
@@ -140,12 +140,13 @@ export default {
         { value: 'JPN', text: 'JPN' },
         { value: 'SGP', text: 'SGP' }
       ],
-      departureTime: new Date(),
+      departureTime: null,
       departureTimeOption: {
-        format: 'YYYY/MM/DD h:mm:ss',
-        useCurrent: false
+        format: 'YYYY-MM-DD hh:mm:ss',
+        useCurrent: false,
+        minDate: new Date()
       },
-      arrivedTime: new Date(),
+      arrivedTime: null,
       price: '',
       transit: null,
       transitOption: [
@@ -169,7 +170,8 @@ export default {
     to: { required },
     price: { required },
     transit: { required },
-    departureTime: { required }
+    departureTime: { required },
+    arrivedTime: { required }
   },
   methods: {
     validationStatus (validation) {
