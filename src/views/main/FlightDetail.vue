@@ -84,7 +84,11 @@
                 <div class="card">
                     <div class="box">
                         <div class="box-notification-green">
-
+                            <div class="notification-green">
+                                <span>Passenger : 1 Adult</span>
+                                <span>Same as contact person</span>
+                                <input type="checkbox">
+                            </div>
                         </div>
                         <div class="text-input">
                             <label for="title">Title</label>
@@ -336,11 +340,37 @@ html, body {
 
 .box-notification-green {
     display: flex;
+    justify-content: center;
     width: 100%;
     height: 50px;
     background: rgba(35, 149, 255, 0.1);
     border-radius: 10px;
     margin-top: 10px;
+}
+
+.box-notification-green .notification-green {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+}
+
+.box-notification-green .notification-green span{
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #595959;
+}
+
+.box-notification-green .notification-green span:nth-child(2){
+    margin-left: auto;
+    margin-right: 3%;
+}
+
+.box-notification-green .notification-green input{
+    background: transparent;
 }
 
 .box-top {
