@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid {
+    background: white;
+}
+
 .slide {
     display: none;
 }

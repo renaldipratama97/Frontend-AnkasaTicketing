@@ -10,6 +10,7 @@ import SearchResult from '../views/main/SearchResult.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
 import FlightDetail from '../views/main/FlightDetail.vue'
+import History from '../views/main/History.vue'
 
 Vue.use(VueRouter)
 
@@ -66,6 +67,12 @@ const routes = [
         path: 'flight-detail',
         name: 'FlightDetail',
         component: FlightDetail,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'history',
+        name: 'History',
+        component: History,
         meta: { requiresAuth: true }
       }
     ]
