@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import Swal from 'sweetalert2'
+import { mapMutations, mapActions } from 'vuex'
 import { required, minLength, email } from 'vuelidate/lib/validators'
 export default {
   name: 'Login',
@@ -53,13 +54,27 @@ export default {
     password: { required, minLength: minLength(6) }
   },
   methods: {
+    ...mapActions(['login']),
     validationStatus (validation) {
       return typeof validation !== 'undefined' ? validation.$error : false
     },
     goLogin () {
       this.$v.$touch()
       if (this.$v.$pendding || this.$v.$error) return
-      console.log('coba')
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      this.login(payload)
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Login success',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          this.$router.push('/main/profile')
+        })
     },
     ...mapMutations(['togglePassword'])
   }

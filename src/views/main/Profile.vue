@@ -26,7 +26,7 @@
                         <button class="profile">Profile</button>
                         <button class="myreview">My Review</button>
                         <button class="settings">Settings</button>
-                        <button class="logout">Logout</button>
+                        <button class="logout" @click.prevent="goLogout">Logout</button>
                     </div>
                 </div>
             </div>
@@ -73,8 +73,28 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
 export default {
-  name: 'Profile'
+  name: 'Profile',
+  methods: {
+    ...mapActions(['logout']),
+    goLogout () {
+      this.logout()
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Logout',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          this.$router.push('/auth/login')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 
