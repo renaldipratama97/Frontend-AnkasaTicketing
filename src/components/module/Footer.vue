@@ -60,6 +60,7 @@ export default {
 .row {
     display: flex;
     padding: 100px 100px 0 100px;
+    background: white;
 }
 
 .boxdescribe {
