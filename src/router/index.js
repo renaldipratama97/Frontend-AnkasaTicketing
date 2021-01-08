@@ -9,6 +9,7 @@ import MyBooking from '../views/main/MyBooking.vue'
 import SearchResult from '../views/main/SearchResult.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
+import FlightDetail from '../views/main/FlightDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -59,6 +60,12 @@ const routes = [
         path: 'my-booking',
         name: 'MyBooking',
         component: MyBooking,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'flight-detail',
+        name: 'FlightDetail',
+        component: FlightDetail,
         meta: { requiresAuth: true }
       }
     ]

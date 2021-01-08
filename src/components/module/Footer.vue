@@ -57,6 +57,10 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid {
+    background: #FFFFFF !important;
+}
+
 .row {
     display: flex;
     padding: 100px 100px 0 100px;
