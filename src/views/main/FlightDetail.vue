@@ -67,7 +67,8 @@
                             </div>
                         </div>
                         <div class="payment">
-
+                            <span>Total Payment</span>
+                            <span>$ 145.00</span>
                         </div>
                     </div>
                 </div>
@@ -170,13 +171,6 @@ html, body {
     margin: 0;
     font-family: 'Lato';
 }
-
-.container-fluid {
-    background: #F5F6FA;
-}
-
-/* .row {
-} */
 
 .passenger-detail {
     display: flex;
@@ -508,7 +502,7 @@ html, body {
 .box-payment .refund-reschedule{
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
+    margin-top: 10%;
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
@@ -527,6 +521,33 @@ html, body {
 
 .box-payment .refund-reschedule .reschedule{
     margin-top: 3%;
+}
+
+.box-payment .payment {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    width: 100%;
+    height: 100px;
+    border-top: 1px solid #E6E6E6;;
+}
+
+.box-payment .payment span{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000000;
+}
+
+.box-payment .payment span:nth-child(2){
+    margin-left: auto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #2395FF;
 }
 
 .button-payment {

@@ -18,7 +18,7 @@
                 <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
             <div class="boxprofile">
-                <router-link to="/main/profile"><img class="photo" src="../../assets/profile.png" alt="image4"></router-link>
+                <router-link to="/main/profile"><img class="photo" :src="userProfile.data.avatar" alt="image4"></router-link>
             </div>
             <div class="slide">
             <Slide right id="bm-burger-button">
@@ -35,9 +35,18 @@
 
 <script>
 import { Slide } from 'vue-burger-menu'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Header',
+  methods: {
+    ...mapActions(['getUserById'])
+  },
+  mounted () {
+    this.getUserById()
+  },
+  computed: {
+    ...mapGetters(['userProfile'])
+  },
   components: {
     Slide
   }
@@ -45,8 +54,17 @@ export default {
 </script>
 
 <style scoped>
+.container-fluid {
+    background: #FFFFFF;
+    border-radius: 0px 0px 30px 30px;
+}
+
 .slide {
     display: none;
+}
+
+.box-profile a img {
+    border-radius: 100%;
 }
 
 #bm-burger-button {
@@ -155,9 +173,9 @@ export default {
 
 .photo {
     width: 100%;
-    height: auto;
+    height: 100%;
     border: 2px solid #2395FF;
-    border-radius: 30px;
+    border-radius: 100px;
 }
 
 @media (max-width: 1074px) {
