@@ -19,7 +19,7 @@
                 <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
             <div class="boxprofile">
-                <router-link to="/main/profile"><img class="photo" :src="userProfile.data.avatar" alt="image4"></router-link>
+                <router-link to="/main/profile"><img class="photo" :src="userProfile.avatar" alt="image4"></router-link>
             </div>
             <div class="slide">
             <Slide right id="bm-burger-button">

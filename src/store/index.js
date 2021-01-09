@@ -14,7 +14,9 @@ export default new Vuex.Store({
     users: [],
     id: null || localStorage.getItem('id'),
     token: null || localStorage.getItem('token'),
-    userProfile: []
+    userProfile: [],
+    schedules: [],
+    scheduleById: []
   },
   mutations: {
     togglePassword (state) {
@@ -37,6 +39,12 @@ export default new Vuex.Store({
     },
     SET_USER_BY_ID (state, payload) {
       state.userProfile = payload
+    },
+    SET_SCHEDULES (state, payload) {
+      state.schedules = payload
+    },
+    SET_SCHEDULE_BY_ID (state, payload) {
+      state.scheduleById = payload
     }
   },
   actions: {
@@ -119,8 +127,53 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.get(`${process.env.VUE_APP_URL_BACKEND}/users/${localStorage.getItem('id')}`)
           .then(res => {
-            const result = res.data
+            const result = res.data.data
             context.commit('SET_USER_BY_ID', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    createTicket (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${process.env.VUE_APP_URL_BACKEND}/tickets`, payload)
+          .then(res => {
+            const result = res.data
+            console.log(result)
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    getSchedules (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules`)
+          .then(res => {
+            const result = res.data.schedules
+            context.commit('SET_SCHEDULES', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    getSchedulesById (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules/${payload.id}`)
+          .then(res => {
+            const result = res.data.schedule
+            context.commit('SET_SCHEDULE_BY_ID', result)
             resolve(res)
           })
           .catch(err => {
@@ -201,6 +254,12 @@ export default new Vuex.Store({
     },
     userProfile (state) {
       return state.userProfile
+    },
+    schedules (state) {
+      return state.schedules
+    },
+    scheduleById (state) {
+      return state.scheduleById
     }
   },
   modules: {

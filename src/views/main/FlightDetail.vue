@@ -12,17 +12,17 @@
                     <div class="box">
                         <div class="text-input">
                             <label for="fullname">Full Name</label>
-                            <input type="text" id="fullname" name="fullname">
+                            <input type="text" id="fullname" v-model="userProfile.fullName" name="fullname" readonly>
                         </div>
 
                         <div class="text-input">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" v-model="userProfile.email" name="email" readonly>
                         </div>
 
                         <div class="text-input">
                             <label for="phonenumber">Phone Number</label>
-                            <input type="text" id="phonenumber" name="phonenumber">
+                            <input type="text" id="phonenumber" v-model="userProfile.phoneNumber" name="phonenumber" readonly>
                         </div>
 
                         <div class="box-notification-red">
@@ -44,17 +44,17 @@
                 <div class="card">
                     <div class="box-payment">
                         <div class="airlines">
-                            <img src="../../assets/garuda-indonesia.svg" alt="airlines-logo">
-                            <span>Garuda Indonesia</span>
+                            <img :src="scheduleById.airlinesLogo" alt="airlines-logo">
+                            <span>{{scheduleById.airline}}</span>
                         </div>
                         <div class="from-to">
-                            <span>Medan (IDN)</span>
+                            <span>{{scheduleById.from}}</span>
                             <img src="../../assets/icon-airlines.svg" alt="icon-airlines">
-                            <span>Tokyo (JPN)</span>
+                            <span>{{scheduleById.to}}</span>
                         </div>
                         <div class="date">
-                            <span>Sunday, 10 Agustus 2020</span>
-                            <span>20.00 - 22.00</span>
+                            <span>{{formatDay(scheduleById.departureTime)}}, {{formatDate(scheduleById.departureTime)}}</span>
+                            <span>{{formatJam(scheduleById.departureTime)}} - {{formatJam(scheduleById.arrivedTime)}}</span>
                         </div>
                         <div class="refund-reschedule">
                             <div class="refund">
@@ -68,7 +68,7 @@
                         </div>
                         <div class="payment">
                             <span>Total Payment</span>
-                            <span>$ 145.00</span>
+                            <span>Rp. {{scheduleById.price}}</span>
                         </div>
                     </div>
                 </div>
@@ -88,22 +88,25 @@
                             <div class="notification-green">
                                 <span>Passenger : 1 Adult</span>
                                 <span>Same as contact person</span>
-                                <input type="checkbox">
+                                <input type="checkbox" id="checked" name="checked" @click="handleChecked">
                             </div>
                         </div>
                         <div class="text-input">
                             <label for="title">Title</label>
-                            <input type="text" id="title" name="title">
+                            <select name="title" v-model="title" id="title">
+                                <option value="Mr">Mr</option>
+                                <option value="Miss">Miss</option>
+                            </select>
                         </div>
 
                         <div class="text-input">
                             <label for="fullname">Full Name</label>
-                            <input type="text" id="fullname" name="fullname">
+                            <input type="text" id="fullname" v-model="fullName" name="fullname">
                         </div>
 
                         <div class="text-input">
                             <label for="nationality">Nationality</label>
-                            <input type="text" id="nationality" name="nationality">
+                            <input type="text" id="nationality" v-model="nationality" name="nationality">
                         </div>
                     </div>
                 </div>
@@ -120,7 +123,7 @@
                 <div class="last-card">
                     <div class="box-top">
                         <div class="travel-insurance">
-                            <input type="checkbox" id="checkbox" >
+                            <input type="checkbox" id="insurance" @click="handleInsurance">
                             <span> Travel Insurance </span>
                             <span>10000/pax</span>
                         </div>
@@ -138,7 +141,7 @@
         <div class="row">
             <div class="col-xl-8">
                 <div class="button-payment">
-                    <button class="btn btn-primary">Process to Payment</button>
+                    <button @click.prevent="processTicket" class="btn btn-primary">Process to Payment</button>
                 </div>
             </div>
         </div>
@@ -149,18 +152,72 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import moment from 'moment'
+moment.locale('id')
+
 export default {
   name: 'FlighDetail',
   data () {
     return {
-
+      title: '',
+      fullName: '',
+      nationality: '',
+      travelInsurance: ''
     }
   },
   methods: {
-
+    ...mapActions(['getUserById', 'createTicket', 'getSchedulesById']),
+    formatJam (date) {
+      return moment(date).format('LT')
+    },
+    formatDay (date) {
+      return moment(date).format('dddd')
+    },
+    formatDate (date) {
+      return moment(date).format('LL')
+    },
+    handleChecked () {
+      if (document.getElementById('checked').checked) {
+        this.fullName = this.userProfile.fullName
+      } else {
+        this.fullName = ''
+      }
+    },
+    handleInsurance () {
+      if (document.getElementById('insurance').checked) {
+        this.travelInsurance = 'Yes'
+      } else {
+        this.travelInsurance = 'No'
+      }
+    },
+    getParamsSchedule () {
+      const payload = {
+        id: this.$route.params.idschedule
+      }
+      this.getSchedulesById(payload)
+    },
+    processTicket () {
+      const payload = {
+        scheduleId: this.$route.params.idschedule,
+        userId: localStorage.getItem('id'),
+        title: this.title,
+        fullName: this.fullName,
+        nationality: this.nationality,
+        travelInsurance: this.travelInsurance,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+      this.createTicket(payload)
+      this.$router.push('/main/my-booking')
+    }
   },
   mounted () {
-
+    this.getUserById()
+    this.getParamsSchedule()
+  },
+  computed: {
+    ...mapGetters(['userProfile', 'scheduleById'])
   }
 }
 </script>
@@ -295,6 +352,23 @@ html, body {
 }
 
 .text-input input:focus {
+    outline: none;
+}
+
+.text-input select {
+    height: 30px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(210, 194, 255, 0.68);
+}
+
+.text-input select:focus {
     outline: none;
 }
 

@@ -5,12 +5,12 @@
                 <div class="boxprofile">
                     <div class="boxuser">
                         <div class="boxphoto">
-                            <img :src="userProfile.data.avatar" alt="image1">
+                            <img :src="userProfile.avatar" id="avatar" alt="image1">
                             <input type="file" id="uploadPhoto" @change = "uploadPhoto">
                         </div>
                         <label for="uploadPhoto" class="selectphoto">Select Photo</label>
-                        <p class="name">{{userProfile.data.fullName}}</p>
-                        <p class="location">{{userProfile.data.address}}</p>
+                        <p class="name">{{userProfile.fullName}}</p>
+                        <p class="location">{{userProfile.address}}</p>
                     </div>
                     <div class="addcard">
                         <p>Cards</p>
@@ -39,11 +39,11 @@
                         <p class="title3">Contact</p>
                         <div class="boxemail">
                             <label for="email">Email</label><br>
-                            <input id="email" type="email" v-model="userProfile.data.email" placeholder="Input your email">
+                            <input id="email" type="email" v-model="userProfile.email" placeholder="Input your email">
                         </div>
                         <div class="boxphonenumber">
                             <label for="phonenumber">Phone Number</label><br>
-                            <input id="phonenumber" type="number" v-model="userProfile.data.phoneNumber" placeholder="Input your phone number">
+                            <input id="phonenumber" type="number" v-model="userProfile.phoneNumber" placeholder="Input your phone number">
                         </div>
                         <a class="accountsetting" href="#">Account Settings ></a>
                     </div>
@@ -51,19 +51,19 @@
                         <p class="title4">Biodata</p>
                         <div class="boxusername">
                             <label for="username">Username</label><br>
-                            <input id="username" type="text" v-model="userProfile.data.fullName" placeholder="Input your username">
+                            <input id="username" type="text" v-model="userProfile.fullName" placeholder="Input your username">
                         </div>
                         <div class="boxcity">
                             <label for="city">City</label><br>
-                            <input id="city" type="text" v-model="userProfile.data.city" placeholder="Input your city">
+                            <input id="city" type="text" v-model="userProfile.city" placeholder="Input your city">
                         </div>
                         <div class="boxaddress">
                             <label for="address">Address</label><br>
-                            <input id="address" type="text" v-model="userProfile.data.address" placeholder="Input your address">
+                            <input id="address" type="text" v-model="userProfile.address" placeholder="Input your address">
                         </div>
                         <div class="boxpostcode">
                             <label for="postcode">Post Code</label><br>
-                            <input id="postcode" type="text" v-model="userProfile.data.postCode" placeholder="Input your postcode">
+                            <input id="postcode" type="text" v-model="userProfile.postCode" placeholder="Input your postcode">
                         </div>
                         <b-button v-b-modal.modal-prevent-closing class="save">Edit</b-button>
                         <!-- <button @click.prevent="editProfile" class="save">Edit</button> -->
@@ -117,6 +117,7 @@ export default {
   },
   mounted () {
     this.getUserById()
+    this.onInputUploadChange()
   },
   methods: {
     ...mapActions(['logout', 'getUserById', 'updateProfile', 'updateAvatar']),
@@ -203,7 +204,7 @@ export default {
       if (input.files && input.files[0]) {
         var reader = new FileReader()
         reader.onload = function (e) {
-          $('#uploadPhoto').attr('src', e.target.result)
+          $('#avatar').attr('src', e.target.result)
         }
         reader.readAsDataURL(input.files[0])
       }
