@@ -10,6 +10,7 @@ import SearchResult from '../views/main/SearchResult.vue'
 import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
 import FlightDetail from '../views/main/FlightDetail.vue'
+import AddSchedule from '../views/main/AddSchedule.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,11 @@ const routes = [
         name: 'BookingDetail',
         component: BookingDetail,
         meta: { requiresAuth: true }
+      },
+      {
+        path: 'admin/add-schedule',
+        name: 'AddSchedule',
+        component: AddSchedule
       },
       {
         path: 'profile',

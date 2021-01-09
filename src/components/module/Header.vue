@@ -10,8 +10,9 @@
                 <img class="iconsearch" src="../../assets/search.png" alt="image2">
             </div>
             <div class="boxlink">
-                <a class="findticket" href="#">Find Ticket</a>
-                <a class="mybooking" href="#">My Booking</a>
+                <router-link class="findticket" :to="{ path: '/main/search-result' }">Find Ticket</router-link>
+                <router-link class="mybooking" to="/main/my-booking">My Booking</router-link>
+                <router-link to="/main/admin/add-schedule" class="mybooking">Add Schedule</router-link>
             </div>
             <div class="boxnotif">
                 <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
@@ -23,8 +24,9 @@
             <div class="slide">
             <Slide right id="bm-burger-button">
                 <a id="profile" class="profile" href="#"><span>Profile</span></a>
-                <a id="findtickets" class="findtickets" href="#"><span>Find Ticket</span></a>
-                <a id="mybookings" class="mybookings" href="#"><span>My Booking</span></a>
+                <router-link id="findtickets" class="findtickets" :to="{ path: '/main/search-result' }"><span>Find Ticket</span></router-link>
+                <router-link id="mybookings" class="mybookings" to="/main/my-booking"><span>My Booking</span></router-link>
+                <router-link to="/main/admin/add-schedule" id="mybookings" class="mybookings"><span>Add Schedule</span></router-link>
                 <a id="messages" class="messages" href="#"><span>Message</span></a>
                 <a id="notification" class="notification" href="#"><span>Notification</span></a>
             </Slide>
