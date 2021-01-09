@@ -30,41 +30,23 @@
                     </div>
                 </div>
             </div>
-             <div class="col-lg-8">
-                <p class="title1">Profile</p>
-                <p class="title2">Profile</p>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <p class="title3">Contact</p>
-                        <div class="boxemail">
-                            <label for="email">Email</label><br>
-                            <input id="email" type="email" placeholder="Input your email">
-                        </div>
-                        <div class="boxphonenumber">
-                            <label for="phonenumber">Phone Number</label><br>
-                            <input id="phonenumber" type="number" placeholder="Input your phone number">
-                        </div>
-                        <a class="accountsetting" href="#">Account Settings ></a>
+            <div class="col-lg-8">
+                <div class="boxorderhistory">
+                    <div class="boxtitlehistory">
+                        <p class="title5">History</p>
+                        <p class="title6">History</p>
                     </div>
-                    <div class="col-lg-6">
-                        <p class="title4">Biodata</p>
-                        <div class="boxusername">
-                            <label for="username">Username</label><br>
-                            <input id="username" type="text" placeholder="Input your username">
+                    <div class="line"></div>
+                    <div class="boxhistory">
+                        <p class="schedule">Monday, 20 July '20 - 12:33</p>
+                        <div class="historyticket">
+                            <p class="departurefrom">IDN</p>
+                            <img src="../../assets/airplane-icon.png" alt="image2">
+                            <p class="arriveto">JPN</p>
                         </div>
-                        <div class="boxcity">
-                            <label for="city">City</label><br>
-                            <input id="city" type="text" placeholder="Input your city">
-                        </div>
-                        <div class="boxaddress">
-                            <label for="address">Address</label><br>
-                            <input id="address" type="text" placeholder="Input your address">
-                        </div>
-                        <div class="boxpostcode">
-                            <label for="postcode">Post Code</label><br>
-                            <input id="postcode" type="text" placeholder="Input your postcode">
-                        </div>
-                        <button class="save">Save</button>
+                        <p class="nameairlinescode">Garuda Indonesia, AB-221</p>
+                        <button class="viewdetails">View Details</button>
+                        <div class="line"></div>
                     </div>
                 </div>
             </div>
@@ -73,28 +55,8 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
-import { mapActions } from 'vuex'
 export default {
-  name: 'Profile',
-  methods: {
-    ...mapActions(['logout']),
-    goLogout () {
-      this.logout()
-        .then(() => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Logout',
-            showConfirmButton: false,
-            timer: 2000
-          })
-          this.$router.push('/auth/login')
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    }
-  }
+  name: 'History'
 }
 </script>
 
@@ -331,22 +293,34 @@ export default {
 
 .col-lg-8 {
     height: max-content;
-    background: #FFFFFF;
-    border-radius: 15px;
 }
 
-.title1 {
-    margin: 15px 0;
+.boxorderhistory {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.boxtitlehistory {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title5 {
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 14px;
 
     color: #2395FF;
 }
 
-.title2 {
-    margin: 0;
+.title6 {
     font-family: Poppins;
     font-style: normal;
     font-weight: 600;
@@ -355,106 +329,113 @@ export default {
     color: #000000;
 }
 
-.title3 {
+.schedule {
     font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    margin-top: 10px;
-
-    color: #000000;
-}
-
-.col-lg-6 label {
-    font-family: Lato;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-    margin-top: 10px;
-    padding-left: 5px;
-
-    color: #9B96AB;
-}
-
-.col-lg-6 input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #d2c2ffad;
-    padding: 0px 0px 10px 5px;
-    margin-bottom: 15px;
-    outline: none;
-}
-
-#phonenumber::-webkit-outer-spin-button,
-#phonenumber::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.accountsetting {
-    float: right;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    text-decoration: none;
-
-    color: #2395FF;
-}
-
-.title4 {
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    margin-top: 10px;
 
     color: #000000;
 }
 
-.save {
-    width: 150px;
-    height: 50px;
-    background: #FFFFFF;
-    box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
-    border: none;
-    border-radius: 10px;
+.departurefrom, .arriveto, .departurefrom1, .arriveto1 {
     font-family: Poppins;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #000000;
+}
+
+.historyticket {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+}
+
+.historyticket img  {
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.nameairlinescode, .nameairlinescode1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+
+    color: #979797;
+}
+
+.line {
+    border: 1px solid #E6E6E6;
+    margin-bottom: 16px;
+}
+
+.viewdetails {
+    width: max-content;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
     font-size: 16px;
+    border: none;
+    background: none;
+    background-image: url('../../assets/arrowdown.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 30px;
+    margin-bottom: 10px;
     outline: none;
-    float: right;
 
     color: #2395FF;
 }
 
-.save:hover {
-    background: #2395FF;
-    color: #FFFFFF;
-}
-
-.save:focus {
-    background: #2395FF;
-    color: #FFFFFF;
+@media (max-width: 991px) {
+    .boxorderhistory {
+        margin-top: 20px;
+    }
 }
 
 @media (max-width: 768px) {
     .row {
         padding: 0;
     }
-    .accountsetting {
+    .boxorderhistory {
         margin: 20px 0;
     }
-    .col-lg-4 {
-        padding: 20px 0 0 0;
+    .boxprofile {
+        display: none;
     }
-    .col-lg-8 {
-        margin: 20px 0;
+    .historyticket {
+        width: 30%;
     }
-    .save {
-        margin-bottom: 20px;
+}
+
+@media (max-width: 575px) {
+    .row {
+        margin: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .historyticket {
+        width: 40%;
+    }
+}
+
+@media (max-width: 375px) {
+    .container {
+        padding: 0;
+    }
+    .historyticket {
+        width: 50%;
+    }
+    .title5 {
+        margin: 0;
+    }
+    .title6 {
+        margin: 0;
     }
 }
 </style>

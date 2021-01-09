@@ -37,7 +37,7 @@
                             <p class="title5">My Booking</p>
                             <div class="boxorderhistory1">
                                 <p class="title6">My Booking</p>
-                                <a class="orderhistory" href="#">Order History</a>
+                                <router-link class="orderhistory" to="/main/history">Order History</router-link>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@ export default {
 
 <style scoped>
 .col-lg-4 {
-    padding-top: 40px;
+    padding: 20px 15px;
 }
 
 .boxprofile {
@@ -327,9 +327,7 @@ export default {
 
 .col-lg-8 {
     height: max-content;
-    margin-top: 12px;
-    margin-bottom: 110px;
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 .boxorderhistory {
@@ -515,10 +513,6 @@ export default {
     }
     .col-lg-4 {
         padding: 0;
-    }
-    .col-lg-8 {
-        padding: 0;
-        margin-bottom: 15px;
     }
     .boxstatusbooking {
         margin: 10px 0;

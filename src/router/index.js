@@ -11,6 +11,7 @@ import BookingDetail from '../views/main/BookingDetail.vue'
 import Profile from '../views/main/Profile.vue'
 import FlightDetail from '../views/main/FlightDetail.vue'
 import AddSchedule from '../views/main/AddSchedule.vue'
+import History from '../views/main/History.vue'
 
 Vue.use(VueRouter)
 
@@ -54,7 +55,8 @@ const routes = [
       {
         path: 'admin/add-schedule',
         name: 'AddSchedule',
-        component: AddSchedule
+        component: AddSchedule,
+        meta: { requiresAuth: true }
       },
       {
         path: 'profile',
@@ -72,6 +74,12 @@ const routes = [
         path: 'flight-detail',
         name: 'FlightDetail',
         component: FlightDetail,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'history',
+        name: 'History',
+        component: History,
         meta: { requiresAuth: true }
       }
     ]
