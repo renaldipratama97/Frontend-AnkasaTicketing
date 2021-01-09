@@ -13,7 +13,10 @@ export default new Vuex.Store({
     password: '',
     users: [],
     id: null || localStorage.getItem('id'),
-    token: null || localStorage.getItem('token')
+    token: null || localStorage.getItem('token'),
+    role: null,
+    schedule: [],
+    userProfile: []
   },
   mutations: {
     togglePassword (state) {
@@ -29,10 +32,22 @@ export default new Vuex.Store({
       state.id = payload.id
       state.token = payload.token
     },
+    set_schedule (state, payload) {
+      state.schedule = payload
+    },
+    set_role (state, payload) {
+      state.role = payload
+    },
+    SET_USER_BY_ID (state, payload) {
+      state.userProfile = payload
+    },
     remove (state) {
       state.users = []
       state.id = null
       state.token = null
+      state.schedule = []
+      state.userProfile = []
+      state.role = null
     }
   },
   actions: {
@@ -53,11 +68,13 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         axios.post(`${process.env.VUE_APP_URL_BACKEND}/users/login`, payload)
           .then(res => {
-            const result = res.data
+            const result = res.data.data
             console.log(result)
-            localStorage.setItem('id', result.data.id)
-            localStorage.setItem('token', result.data.token)
-            context.commit('set_user', result.data)
+            localStorage.setItem('id', result.id)
+            localStorage.setItem('token', result.token)
+            localStorage.setItem('role', result.role)
+            context.commit('set_user', result)
+            context.commit('set_role', result.role)
             resolve(result)
           })
           .catch(err => {
@@ -70,9 +87,36 @@ export default new Vuex.Store({
       localStorage.removeItem('id')
       localStorage.removeItem('token')
     },
+    addSchedule (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${process.env.VUE_APP_URL_BACKEND}/schedules/create`, payload)
+          .then(res => {
+            const result = res.data.message
+            context.commit('set_schedule', result)
+            resolve(result)
+          })
+          .catch(err => {
+            console.log(err.response)
+            reject(err)
+          })
+      })
+    },
+    getUserById (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/users/${localStorage.id}`)
+          .then(res => {
+            const result = res.data.data
+            context.commit('SET_USER_BY_ID', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     interceptorRequest () {
       axios.interceptors.request.use(function (config) {
-        config.headers.Authorization = `Bearer ${localStorage.getItem('id')}`
+        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
         return config
       }, function (error) {
         return Promise.reject(error)
@@ -80,7 +124,7 @@ export default new Vuex.Store({
     },
     interceptorResponse () {
       axios.interceptors.response.use(function (response) {
-        console.log(response.data)
+        console.log(response.data.data)
         if (response.data.status === 'Success') {
           if (response.data.message === 'Register success') {
             Swal.fire({
@@ -90,6 +134,13 @@ export default new Vuex.Store({
               timer: 2000
             })
             router.push('/auth/login')
+          } else if (response.data.message === 'Create schedule success!') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Create schedule success!',
+              showConfirmButton: false,
+              timer: 2000
+            })
           }
         } else {
           if (response.data.message === 'Email not found') {
@@ -126,6 +177,13 @@ export default new Vuex.Store({
               showConfirmButton: false,
               timer: 2000
             })
+          } else if (error.response.data.message === 'Invalid token') {
+            Swal.fire({
+              icon: 'error',
+              title: 'Invalid token',
+              showConfirmButton: false,
+              timer: 2000
+            })
           }
         }
         return Promise.reject(error)
@@ -135,6 +193,16 @@ export default new Vuex.Store({
   getters: {
     isLogin (state) {
       return state.token !== null
+    },
+    userProfile (state) {
+      return state.userProfile
+    },
+    isAdmin (state) {
+      if (state.role === 'Admin') {
+        return 'Admin'
+      } else {
+        return 'Admin'
+      }
     }
   },
   modules: {

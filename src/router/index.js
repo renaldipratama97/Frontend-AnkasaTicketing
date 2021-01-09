@@ -56,7 +56,7 @@ const routes = [
         path: 'admin/add-schedule',
         name: 'AddSchedule',
         component: AddSchedule,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true, requiresAdmin: true }
       },
       {
         path: 'profile',
@@ -95,12 +95,23 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!store.getters.isLogin) {
-      console.log('?')
       next({
         path: '/auth/login'
       })
     } else {
-      next()
+      const role = localStorage.getItem('role')
+      console.log('isi role', role)
+      if (to.matched.some(record => record.meta.requiresAdmin)) {
+        if (role === 'Admin') {
+          next()
+        } else {
+          next({
+            path: '/main/profile'
+          })
+        }
+      } else {
+        next()
+      }
     }
   } else if (to.matched.some(record => record.meta.requiresVisitor)) {
     if (store.getters.isLogin) {
