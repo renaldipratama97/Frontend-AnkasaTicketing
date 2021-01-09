@@ -12,6 +12,7 @@
             <div class="boxlink">
                 <a class="findticket" href="#">Find Ticket</a>
                 <a class="mybooking" href="#">My Booking</a>
+                <router-link to="/main/admin/add-schedule" class="mybooking">Add Schedule</router-link>
             </div>
             <div class="boxnotif">
                 <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
@@ -25,6 +26,7 @@
                 <a id="profile" class="profile" href="#"><span>Profile</span></a>
                 <a id="findtickets" class="findtickets" href="#"><span>Find Ticket</span></a>
                 <a id="mybookings" class="mybookings" href="#"><span>My Booking</span></a>
+                <router-link to="/main/admin/add-schedule" id="mybookings" class="mybookings"><span>Add Schedule</span></router-link>
                 <a id="messages" class="messages" href="#"><span>Message</span></a>
                 <a id="notification" class="notification" href="#"><span>Notification</span></a>
             </Slide>
