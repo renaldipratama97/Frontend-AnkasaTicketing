@@ -5,11 +5,12 @@
                 <div class="boxprofile">
                     <div class="boxuser">
                         <div class="boxphoto">
-                            <img src="../../assets/profile.png" alt="image1">
+                            <img :src="userProfile.data.avatar" alt="image1">
+                            <input type="file" id="uploadPhoto" @change = "uploadPhoto">
                         </div>
-                        <button class="selectphoto">Select Photo</button>
-                        <p class="name">Mike Kowalski</p>
-                        <p class="location">Medan, Indonesia</p>
+                        <label for="uploadPhoto" class="selectphoto">Select Photo</label>
+                        <p class="name">{{userProfile.data.fullName}}</p>
+                        <p class="location">{{userProfile.data.address}}</p>
                     </div>
                     <div class="addcard">
                         <p>Cards</p>
@@ -38,11 +39,11 @@
                         <p class="title3">Contact</p>
                         <div class="boxemail">
                             <label for="email">Email</label><br>
-                            <input id="email" type="email" placeholder="Input your email">
+                            <input id="email" type="email" v-model="userProfile.data.email" placeholder="Input your email">
                         </div>
                         <div class="boxphonenumber">
                             <label for="phonenumber">Phone Number</label><br>
-                            <input id="phonenumber" type="number" placeholder="Input your phone number">
+                            <input id="phonenumber" type="number" v-model="userProfile.data.phoneNumber" placeholder="Input your phone number">
                         </div>
                         <a class="accountsetting" href="#">Account Settings ></a>
                     </div>
@@ -50,21 +51,43 @@
                         <p class="title4">Biodata</p>
                         <div class="boxusername">
                             <label for="username">Username</label><br>
-                            <input id="username" type="text" placeholder="Input your username">
+                            <input id="username" type="text" v-model="userProfile.data.fullName" placeholder="Input your username">
                         </div>
                         <div class="boxcity">
                             <label for="city">City</label><br>
-                            <input id="city" type="text" placeholder="Input your city">
+                            <input id="city" type="text" v-model="userProfile.data.city" placeholder="Input your city">
                         </div>
                         <div class="boxaddress">
                             <label for="address">Address</label><br>
-                            <input id="address" type="text" placeholder="Input your address">
+                            <input id="address" type="text" v-model="userProfile.data.address" placeholder="Input your address">
                         </div>
                         <div class="boxpostcode">
                             <label for="postcode">Post Code</label><br>
-                            <input id="postcode" type="text" placeholder="Input your postcode">
+                            <input id="postcode" type="text" v-model="userProfile.data.postCode" placeholder="Input your postcode">
                         </div>
-                        <button class="save">Save</button>
+                        <b-button v-b-modal.modal-prevent-closing class="save">Edit</b-button>
+                        <!-- <button @click.prevent="editProfile" class="save">Edit</button> -->
+
+                        <b-modal id="modal-prevent-closing" ref="modal" title="Form Edit Profile" @show="resetModal" @hidden="resetModal" @ok="handleOk" >
+                          <form ref="form" @submit.stop.prevent="editProfile">
+                            <b-form-group label="Username" label-for="username-input" invalid-feedback="Username is required" :state="usernameState">
+                              <b-form-input id="username-input" v-model="username" :state="usernameState" required ></b-form-input>
+                            </b-form-group>
+                            <b-form-group label="Phonenumber" label-for="phonenumber-input" invalid-feedback="Phonenumber is required" :state="phonenumberState">
+                              <b-form-input id="phonenumber-input" v-model="phonenumber" :state="phonenumberState" required ></b-form-input>
+                            </b-form-group>
+                            <b-form-group label="City" label-for="city-input" invalid-feedback="City is required" :state="cityState">
+                              <b-form-input id="city-input" v-model="city" :state="cityState" required ></b-form-input>
+                            </b-form-group>
+                            <b-form-group label="Address" label-for="address-input" invalid-feedback="Address is required" :state="addressState">
+                              <b-form-input id="address-input" v-model="address" :state="addressState" required ></b-form-input>
+                            </b-form-group>
+                            <b-form-group label="Post Code" label-for="postcode-input" invalid-feedback="Postcode is required" :state="postcodeState">
+                              <b-form-input id="postcode-input" v-model="postcode" :state="postcodeState" required ></b-form-input>
+                            </b-form-group>
+                          </form>
+                        </b-modal>
+
                     </div>
                 </div>
             </div>
@@ -74,11 +97,29 @@
 
 <script>
 import Swal from 'sweetalert2'
-import { mapActions } from 'vuex'
+import $ from 'jquery'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'Profile',
+  data () {
+    return {
+      phonenumber: '',
+      username: '',
+      city: '',
+      address: '',
+      postcode: '',
+      phonenumberState: null,
+      usernameState: null,
+      cityState: null,
+      addressState: null,
+      postcodeState: null
+    }
+  },
+  mounted () {
+    this.getUserById()
+  },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'getUserById', 'updateProfile', 'updateAvatar']),
     goLogout () {
       this.logout()
         .then(() => {
@@ -93,7 +134,83 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    resetModal () {
+      this.phonenumber = ''
+      this.username = ''
+      this.city = ''
+      this.address = ''
+      this.postcode = ''
+      this.phonenumberState = null
+      this.usernameState = null
+      this.cityState = null
+      this.addressState = null
+      this.postcodeState = null
+    },
+    checkFormValidity () {
+      const valid = this.$refs.form.checkValidity()
+      this.usernameState = valid
+      this.phonenumberState = valid
+      this.cityState = valid
+      this.addressState = valid
+      this.postcodeState = valid
+      return valid
+    },
+    handleOk (bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault()
+      // Trigger submit handler
+      this.editProfile()
+    },
+    editProfile () {
+      const payload = {
+        id: localStorage.getItem('id'),
+        fullName: this.username,
+        phoneNumber: this.phonenumber,
+        city: this.city,
+        address: this.address,
+        postCode: this.postcode
+      }
+      console.log('Data Payload: ', payload)
+      this.updateProfile(payload)
+      this.getUserById()
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-prevent-closing')
+      })
+    },
+    uploadPhoto () {
+      const imagename = (event.target.files[0].name)
+      this.picture = imagename
+      this.previewImg = URL.createObjectURL(event.target.files[0])
+      const form = new FormData()
+      const image = document.getElementById('uploadPhoto').files[0]
+      form.append('avatar', image)
+      const id = localStorage.getItem('id')
+      const payload = {
+        id,
+        formData: form
+      }
+      this.updateAvatar(payload)
+      this.getUserById()
+    },
+    onInputUploadChange () {
+      const self = this
+      $('#uploadPhoto').change(function () {
+        self.readImgUrlAndPreview(this)
+      })
+    },
+    readImgUrlAndPreview (input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader()
+        reader.onload = function (e) {
+          $('#uploadPhoto').attr('src', e.target.result)
+        }
+        reader.readAsDataURL(input.files[0])
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['userProfile'])
   }
 }
 </script>
@@ -127,13 +244,20 @@ export default {
 
 .boxphoto img {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
     border: 5px solid white;
     border-radius: 100px;
     display: block;
 }
 
+.boxphoto input {
+    display: none;
+}
+
 .selectphoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 150px;
     height: 50px;
 
