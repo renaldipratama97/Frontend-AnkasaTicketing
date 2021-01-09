@@ -12,21 +12,21 @@
             <div class="boxlink">
                 <router-link class="findticket" :to="{ path: '/main/search-result' }">Find Ticket</router-link>
                 <router-link class="mybooking" to="/main/my-booking">My Booking</router-link>
-                <router-link to="/main/admin/add-schedule" class="mybooking">Add Schedule</router-link>
+                <router-link to="/main/admin/add-schedule" :class="userProfile.role === isAdmin ? 'admin' : 'mybooking'">Add Schedule</router-link>
             </div>
             <div class="boxnotif">
                 <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
                 <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
             <div class="boxprofile">
-                <router-link to="/main/profile"><img class="photo" :src="userProfile.data.avatar" alt="image4"></router-link>
+                <router-link to="/main/profile"><img class="photo" :src="userProfile.avatar" alt="image4"></router-link>
             </div>
             <div class="slide">
             <Slide right id="bm-burger-button">
-                <a id="profile" class="profile" href="#"><span>Profile</span></a>
+                <router-link id="profile" class="profile" to="/main/profile"><span>Profile</span></router-link>
                 <router-link id="findtickets" class="findtickets" :to="{ path: '/main/search-result' }"><span>Find Ticket</span></router-link>
                 <router-link id="mybookings" class="mybookings" to="/main/my-booking"><span>My Booking</span></router-link>
-                <router-link to="/main/admin/add-schedule" id="mybookings" class="mybookings"><span>Add Schedule</span></router-link>
+                <router-link to="/main/admin/add-schedule" id="mybookings" :class="userProfile.role === isAdmin ? 'admin' : 'user'"><span>Add Schedule</span></router-link>
                 <a id="messages" class="messages" href="#"><span>Message</span></a>
                 <a id="notification" class="notification" href="#"><span>Notification</span></a>
             </Slide>
@@ -36,21 +36,22 @@
 </template>
 
 <script>
-import { Slide } from 'vue-burger-menu'
 import { mapGetters, mapActions } from 'vuex'
+import { Slide } from 'vue-burger-menu'
 export default {
   name: 'Header',
   methods: {
     ...mapActions(['getUserById'])
   },
-  mounted () {
-    this.getUserById()
-  },
-  computed: {
-    ...mapGetters(['userProfile'])
-  },
   components: {
     Slide
+  },
+  computed: {
+    ...mapGetters(['userProfile', 'isAdmin'])
+  },
+  mounted () {
+    this.getUserById()
+    console.log('diambil di state', this.isAdmin)
   }
 }
 </script>
@@ -59,6 +60,14 @@ export default {
 .container-fluid {
     background: #FFFFFF;
     border-radius: 0px 0px 30px 30px;
+}
+
+.admin {
+    display: none;
+}
+
+.user {
+    display: block;
 }
 
 .slide {

@@ -13,12 +13,9 @@
                 <div class="col-lg-4">
                     <section class="section-photo text-center">
                         <div class="img-airline">
-                            <img src="../../assets/garuda-indonesia-logo.png" alt="logo-airline">
+                            <img :src="userProfile.avatar" alt="logo-airline">
                         </div>
-                        <input type="file" ref="file" id="file" @change="handleUpdate">
-                        <label for="file">
-                            <button type="submit">Select Photo</button>
-                        </label>
+                        <h6>Admin name: {{userProfile.fullName}}</h6>
                     </section>
                 </div>
                 <div class="col-lg-8">
@@ -102,6 +99,7 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'AddSchedule',
   data () {
@@ -174,14 +172,42 @@ export default {
     arrivedTime: { required }
   },
   methods: {
+    ...mapActions(['addSchedule', 'getUserById']),
     validationStatus (validation) {
       return typeof validation !== 'undefined' ? validation.$error : false
     },
     handleUpdate () {
       this.$v.$touch()
       if (this.$v.$pendding || this.$v.$error) return
-      console.log('coba')
+      const payload = {
+        airline: this.airline,
+        airlineClass: this.airlineClass,
+        code: this.code,
+        terminal: this.terminal,
+        gate: this.gate,
+        from: this.from,
+        to: this.to,
+        departureTime: this.departureTime,
+        arrivedTime: this.arrivedTime,
+        price: this.price,
+        transit: this.transit,
+        facilities: this.facilities
+      }
+      console.log(payload)
+      this.addSchedule(payload)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+  computed: {
+    ...mapGetters(['userProfile'])
+  },
+  mounted () {
+    this.getUserById()
   }
 }
 </script>
