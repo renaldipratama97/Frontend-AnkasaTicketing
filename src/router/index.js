@@ -71,7 +71,7 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: 'flight-detail',
+        path: 'flight-detail/:idschedule',
         name: 'FlightDetail',
         component: FlightDetail,
         meta: { requiresAuth: true }

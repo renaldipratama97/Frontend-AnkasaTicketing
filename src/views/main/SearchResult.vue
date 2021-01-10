@@ -163,26 +163,26 @@
                         </div>
                         <button class="sort">Sort by</button>
                     </div>
-                    <div class="boxticket">
+                    <div class="boxticket" v-for="data in schedules" :key="data.id">
                         <div class="boxairlines">
-                            <img class="logoairlines" src="../../assets/garuda-indonesia-logo.png" alt="image8">
-                            <p class="nameairlines">Garuda Indonesia</p>
+                            <img class="logoairlines" :src="data.airlinesLogo" alt="image8">
+                            <p class="nameairlines">{{data.airline}}</p>
                         </div>
                         <div class="destinationtime">
                             <div class="boxdeparture">
                                 <div class="from">
-                                    <p class="departurefrom">IDN</p>
+                                    <p class="departurefrom">{{data.from}}</p>
                                     <p class="departuretime">12:23</p>
                                 </div>
                                 <img class="iconplane" src="../../assets/iconplane.png" alt="image9">
                                 <div class="to">
-                                    <p class="arriveto">JPN</p>
+                                    <p class="arriveto">{{data.to}}</p>
                                     <p class="timearrive">15:21</p>
                                 </div>
                             </div>
                             <div class="boxtimearrived">
                                 <p class="timearrived">3 hours 11 minutes</p>
-                                <p class="transit">(1 transit)</p>
+                                <p class="transit">{{data.transit}}</p>
                             </div>
                             <div class="boxfacilities">
                                 <button class="suitcase"></button>
@@ -190,10 +190,12 @@
                                 <button class="wi-fi"></button>
                             </div>
                             <div>
-                                <p class="amount">Rp.2.000.000</p>
+                                <p class="amount">Rp.{{data.price}}</p>
                             </div>
                             <div class="boxselect">
+                                <router-link :to="{ path: `/main/flight-detail/${data.id}`}">
                                 <button class="selectedticket">Select</button>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -204,6 +206,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'SearchResult',
   data () {
@@ -211,7 +214,14 @@ export default {
       value: 50
     }
   },
+  mounted () {
+    this.getSchedules()
+  },
+  methods: {
+    ...mapActions(['getSchedules'])
+  },
   computed: {
+    ...mapGetters(['schedules']),
     handleValue () {
       const price = 'Rp.' + this.value * 100000
       return price

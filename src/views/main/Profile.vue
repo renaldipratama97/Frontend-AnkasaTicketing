@@ -5,7 +5,7 @@
                 <div class="boxprofile">
                     <div class="boxuser">
                         <div class="boxphoto">
-                            <img :src="userProfile.avatar" alt="image1">
+                            <img :src="userProfile.avatar" id="avatar" alt="image1">
                             <input type="file" id="uploadPhoto" @change = "uploadPhoto">
                         </div>
                         <label for="uploadPhoto" class="selectphoto">Select Photo</label>
@@ -117,6 +117,7 @@ export default {
   },
   mounted () {
     this.getUserById()
+    this.onInputUploadChange()
   },
   methods: {
     ...mapActions(['logout', 'getUserById', 'updateProfile', 'updateAvatar']),
@@ -203,7 +204,7 @@ export default {
       if (input.files && input.files[0]) {
         var reader = new FileReader()
         reader.onload = function (e) {
-          $('#uploadPhoto').attr('src', e.target.result)
+          $('#avatar').attr('src', e.target.result)
         }
         reader.readAsDataURL(input.files[0])
       }

@@ -16,7 +16,9 @@ export default new Vuex.Store({
     token: null || localStorage.getItem('token'),
     role: null,
     schedule: [],
-    userProfile: {}
+    userProfile: {},
+    schedules: [],
+    scheduleById: []
   },
   mutations: {
     togglePassword (state) {
@@ -47,6 +49,12 @@ export default new Vuex.Store({
       state.userProfile = payload
       state.schedule = []
       state.role = null
+    },
+    SET_SCHEDULES (state, payload) {
+      state.schedules = payload
+    },
+    SET_SCHEDULE_BY_ID (state, payload) {
+      state.scheduleById = payload
     }
   },
   actions: {
@@ -160,6 +168,51 @@ export default new Vuex.Store({
           })
       })
     },
+    createTicket (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${process.env.VUE_APP_URL_BACKEND}/tickets`, payload)
+          .then(res => {
+            const result = res.data
+            console.log(result)
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    getSchedules (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules`)
+          .then(res => {
+            const result = res.data.schedules
+            context.commit('SET_SCHEDULES', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    getSchedulesById (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules/${payload.id}`)
+          .then(res => {
+            const result = res.data.schedule
+            context.commit('SET_SCHEDULE_BY_ID', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     interceptorRequest () {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
@@ -249,6 +302,12 @@ export default new Vuex.Store({
       } else {
         return 'Admin'
       }
+    },
+    schedules (state) {
+      return state.schedules
+    },
+    scheduleById (state) {
+      return state.scheduleById
     }
   },
   modules: {
