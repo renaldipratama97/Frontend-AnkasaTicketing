@@ -16,6 +16,7 @@ export default new Vuex.Store({
     token: null || localStorage.getItem('token'),
     role: null,
     schedule: [],
+    schedules: [],
     userProfile: {}
   },
   mutations: {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     set_schedule (state, payload) {
       state.schedule = payload
+    },
+    set_schedules (state, payload) {
+      state.schedules = payload
     },
     set_role (state, payload) {
       state.role = payload
@@ -142,7 +146,7 @@ export default new Vuex.Store({
             resolve(result)
           })
           .catch(err => {
-            console.log(err.response)
+            console.log(err)
             reject(err)
           })
       })
@@ -160,6 +164,19 @@ export default new Vuex.Store({
           })
       })
     },
+    getSchedules (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules?transit=${payload.transit || ''}&facility=${payload.facility || ''}&airline=${payload.airline || ''}&keyword=${payload.keyword || ''}`)
+          .then(res => {
+            const result = res.data.schedules
+            context.commit('set_schedules', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err.response.data)
+          })
+      })
+    },
     interceptorRequest () {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
@@ -170,7 +187,7 @@ export default new Vuex.Store({
     },
     interceptorResponse () {
       axios.interceptors.response.use(function (response) {
-        console.log(response.data.data)
+        console.log(response.data)
         if (response.data.status === 'Success') {
           if (response.data.message === 'Register success') {
             Swal.fire({
@@ -249,6 +266,9 @@ export default new Vuex.Store({
       } else {
         return 'Admin'
       }
+    },
+    schedules (state) {
+      return state.schedules
     }
   },
   modules: {
