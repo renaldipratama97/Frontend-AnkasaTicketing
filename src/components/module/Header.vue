@@ -12,7 +12,7 @@
             <div class="boxlink">
                 <router-link class="findticket" :to="{ path: '/main/search-result' }">Find Ticket</router-link>
                 <router-link class="mybooking" to="/main/my-booking">My Booking</router-link>
-                <router-link to="/main/admin/add-schedule" :class="userProfile.role === isAdmin ? 'admin' : 'mybooking'">Add Schedule</router-link>
+                <router-link to="/main/admin/add-schedule" :class="userProfile.role === isAdmin ? 'mybooking' : 'admin'">Add Schedule</router-link>
             </div>
             <div class="boxnotif">
                 <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
@@ -26,7 +26,7 @@
                 <router-link id="profile" class="profile" to="/main/profile"><span>Profile</span></router-link>
                 <router-link id="findtickets" class="findtickets" :to="{ path: '/main/search-result' }"><span>Find Ticket</span></router-link>
                 <router-link id="mybookings" class="mybookings" to="/main/my-booking"><span>My Booking</span></router-link>
-                <router-link to="/main/admin/add-schedule" id="mybookings" :class="userProfile.role === isAdmin ? 'admin' : 'user'"><span>Add Schedule</span></router-link>
+                <router-link to="/main/admin/add-schedule" id="mybookings" :class="userProfile.role === isAdmin ? 'user' : 'admin'"><span>Add Schedule</span></router-link>
                 <a id="messages" class="messages" href="#"><span>Message</span></a>
                 <a id="notification" class="notification" href="#"><span>Notification</span></a>
             </Slide>
@@ -157,6 +157,7 @@ export default {
     font-weight: 500;
     font-size: 16px;
     padding: 20px;
+    cursor: pointer;
 
     color: #414141;
 }

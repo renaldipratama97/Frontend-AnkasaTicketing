@@ -4,12 +4,8 @@
             <div class="col-lg-4">
                 <div class="boxprofile">
                     <div class="boxuser">
-                        <div class="boxphoto">
-                            <img src="../../assets/profile.png" alt="image1">
-                        </div>
-                        <button class="selectphoto">Select Photo</button>
-                        <p class="name">Mike Kowalski</p>
-                        <p class="location">Medan, Indonesia</p>
+                        <p class="name">{{userProfile.fullName}}</p>
+                        <p class="location">{{userProfile.address}}</p>
                     </div>
                     <div class="addcard">
                         <p>Cards</p>
@@ -23,10 +19,10 @@
                         </div>
                     </div>
                     <div class="boxmenu">
-                        <button class="profile">Profile</button>
+                        <router-link to="/main/profile" class="profile">Profile</router-link>
                         <button class="myreview">My Review</button>
                         <button class="settings">Settings</button>
-                        <button class="logout">Logout</button>
+                        <button class="logout" @click.prevent="goLogout">Logout</button>
                     </div>
                 </div>
             </div>
@@ -42,42 +38,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-lg-12">
-                        <div class="boxstatusbooking">
-                            <p class="schedule">Monday, 20 July '20 - 12:33</p>
-                            <div class="bookingticket">
-                                <p class="departurefrom">IDN</p>
-                                <img src="../../assets/airplane-icon.png" alt="image2">
-                                <p class="arriveto">JPN</p>
-                            </div>
-                            <p class="nameairlinescode">Garuda Indonesia, AB-221</p>
-                            <div class="line"></div>
-                            <div class="boxstatusticket">
-                                <div class="statusticket">
-                                    <p class="title7">Status</p>
-                                    <p class="status">Waiting for payment</p>
-                                </div>
-                                <button class="viewdetails">View Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="boxstatusbooking1">
-                            <p class="schedule1">Monday, 20 July '20 - 12:33</p>
+                        <div class="boxstatusbooking1 mb-3" v-for="myTicket in ticket" :key="myTicket.id">
+                            <p class="schedule1">{{setDate(myTicket.schedule.departureTime)}}</p>
                             <div class="bookingticket1">
-                                <p class="departurefrom1">IDN</p>
+                                <p class="departurefrom1">{{myTicket.schedule.from}}</p>
                                 <img src="../../assets/airplane-icon.png" alt="image3">
-                                <p class="arriveto1">JPN</p>
+                                <p class="arriveto1">{{myTicket.schedule.to}}</p>
                             </div>
-                            <p class="nameairlinescode1">Garuda Indonesia, AB-221</p>
+                            <p class="nameairlinescode1">{{myTicket.schedule.airline}}, {{myTicket.schedule.code}}</p>
                             <div class="line"></div>
                             <div class="boxstatusticket1">
                                 <div class="statusticket1">
                                     <p class="title8">Status</p>
-                                    <p class="status1">Eticket issued</p>
+                                    <p class="status1">{{myTicket.status}}</p>
                                 </div>
                                 <button class="viewdetails1">View Details</button>
                             </div>
@@ -90,8 +65,44 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapGetters, mapActions } from 'vuex'
+import moment from 'moment'
 export default {
-  name: 'MyBooking'
+  name: 'MyBooking',
+  methods: {
+    ...mapActions(['getUserById', 'logout', 'getTicket']),
+    myTicket () {
+      const id = localStorage.getItem('id')
+      console.log('id di my booking', id)
+      this.getTicket(id)
+    },
+    goLogout () {
+      this.logout()
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Logout',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          this.$router.push('/auth/login')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    setDate (date) {
+      return moment(date).format('MMMM Do YYYY, hh:mm a')
+    }
+  },
+  computed: {
+    ...mapGetters(['userProfile', 'ticket'])
+  },
+  mounted () {
+    this.getUserById()
+    this.myTicket()
+  }
 }
 </script>
 
@@ -256,6 +267,10 @@ export default {
     outline: none;
 
     color: #000000;
+}
+
+.profile:hover {
+    text-decoration: none;
 }
 
 .profile:focus {

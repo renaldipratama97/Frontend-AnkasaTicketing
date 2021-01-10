@@ -18,7 +18,8 @@ export default new Vuex.Store({
     schedule: [],
     userProfile: {},
     schedules: [],
-    scheduleById: []
+    scheduleById: [],
+    ticket: {}
   },
   mutations: {
     togglePassword (state) {
@@ -40,10 +41,17 @@ export default new Vuex.Store({
     set_role (state, payload) {
       state.role = payload
     },
+    set_ticket (state, payload) {
+      state.ticket = payload
+    },
     remove (state) {
       state.users = []
       state.id = null
       state.token = null
+      state.ticket = {}
+      state.schedule = []
+      state.role = null
+      state.userProfile = {}
     },
     SET_USER_BY_ID (state, payload) {
       state.userProfile = payload
@@ -187,6 +195,20 @@ export default new Vuex.Store({
           })
       })
     },
+    getTicket (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/tickets/my-booking/${payload}`)
+          .then(res => {
+            const result = res.data.myBookings.tickets
+            console.log('isi get ticket', result)
+            context.commit('set_ticket', result)
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     getSchedules (context, payload) {
       return new Promise((resolve, reject) => {
         axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules`)
@@ -283,6 +305,13 @@ export default new Vuex.Store({
               showConfirmButton: false,
               timer: 2000
             })
+          } else if (error.response.data.message === 'Bookings not found!') {
+            Swal.fire({
+              icon: 'error',
+              title: 'you have not bought the ticket yet',
+              showConfirmButton: false,
+              timer: 2000
+            })
           }
         }
         return Promise.reject(error)
@@ -308,6 +337,9 @@ export default new Vuex.Store({
     },
     scheduleById (state) {
       return state.scheduleById
+    },
+    ticket (state) {
+      return state.ticket
     }
   },
   modules: {
