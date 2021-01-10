@@ -89,6 +89,7 @@ export default {
   },
   mounted () {
     this.myDetailTicket()
+    console.log(this.detailTicket)
   }
 }
 </script>

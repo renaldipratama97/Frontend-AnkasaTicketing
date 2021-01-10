@@ -165,7 +165,7 @@
                     </div>
                     <div class="boxticket" v-for="data in schedules" :key="data.id">
                         <div class="boxairlines">
-                            <img class="logoairlines" :src="data.airlinesLogo" alt="image8">
+                            <img class="logoairlines" :src="data.airlineLogo" alt="image8">
                             <p class="nameairlines">{{data.airline}}</p>
                         </div>
                         <div class="destinationtime">
@@ -216,6 +216,7 @@ export default {
   },
   mounted () {
     this.getSchedules()
+    console.log(this.schedules)
   },
   methods: {
     ...mapActions(['getSchedules'])
