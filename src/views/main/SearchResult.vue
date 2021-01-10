@@ -154,8 +154,8 @@
                 <div class="col-lg-8">
                     <div class="selectticket">
                         <div class="title3">
-                            <p class="text2">{{transit}}</p>
-                            <p class="foundticket"></p>
+                            <p class="text2">Select Ticket</p>
+                            <p class="foundticket">({{schedules.length}} flight found)</p>
                         </div>
                         <button class="sort">Sort by</button>
                     </div>
