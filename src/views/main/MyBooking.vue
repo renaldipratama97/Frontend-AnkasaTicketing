@@ -54,7 +54,7 @@
                                     <p class="title8">Status</p>
                                     <p class="status1">{{myTicket.status}}</p>
                                 </div>
-                                <button class="viewdetails1">View Details</button>
+                                <button class="viewdetails1" @click="goBookingDetail(myTicket.id)">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -94,6 +94,9 @@ export default {
     },
     setDate (date) {
       return moment(date).format('MMMM Do YYYY, hh:mm a')
+    },
+    goBookingDetail (id) {
+      this.$router.push(`/main/booking-detail/${id}`)
     }
   },
   computed: {

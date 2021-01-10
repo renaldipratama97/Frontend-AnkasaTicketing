@@ -19,7 +19,8 @@ export default new Vuex.Store({
     userProfile: {},
     schedules: [],
     scheduleById: [],
-    ticket: {}
+    ticket: {},
+    detailTicket: {}
   },
   mutations: {
     togglePassword (state) {
@@ -44,14 +45,8 @@ export default new Vuex.Store({
     set_ticket (state, payload) {
       state.ticket = payload
     },
-    remove (state) {
-      state.users = []
-      state.id = null
-      state.token = null
-      state.ticket = {}
-      state.schedule = []
-      state.role = null
-      state.userProfile = {}
+    set_detail_ticket (state, payload) {
+      state.detailTicket = payload
     },
     SET_USER_BY_ID (state, payload) {
       state.userProfile = payload
@@ -63,6 +58,15 @@ export default new Vuex.Store({
     },
     SET_SCHEDULE_BY_ID (state, payload) {
       state.scheduleById = payload
+    },
+    remove (state) {
+      state.users = []
+      state.id = null
+      state.token = null
+      state.ticket = {}
+      state.schedule = []
+      state.role = null
+      state.userProfile = {}
     }
   },
   actions: {
@@ -235,6 +239,19 @@ export default new Vuex.Store({
           })
       })
     },
+    getDetailTicket (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/tickets/booking-detail/${payload}`)
+          .then(res => {
+            const result = res.data.booking
+            context.commit('set_detail_ticket', result)
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     interceptorRequest () {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
@@ -245,7 +262,6 @@ export default new Vuex.Store({
     },
     interceptorResponse () {
       axios.interceptors.response.use(function (response) {
-        console.log(response.data.data)
         if (response.data.status === 'Success') {
           if (response.data.message === 'Register success') {
             Swal.fire({
@@ -340,6 +356,9 @@ export default new Vuex.Store({
     },
     ticket (state) {
       return state.ticket
+    },
+    detailTicket (state) {
+      return state.detailTicket
     }
   },
   modules: {

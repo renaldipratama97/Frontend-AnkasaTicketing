@@ -47,7 +47,7 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: 'booking-detail',
+        path: 'booking-detail/:ticketId',
         name: 'BookingDetail',
         component: BookingDetail,
         meta: { requiresAuth: true }

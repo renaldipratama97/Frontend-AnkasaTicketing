@@ -11,10 +11,10 @@
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="flight">
-                                    <img class="airplane" src="../../assets/garuda-indonesia-logo.png" alt="airline">
-                                    <h6 class="from-country">IDN</h6>
+                                    <img class="airplane" :src="detailTicket.schedule.airlineLogo" alt="airline">
+                                    <h6 class="from-country">{{detailTicket.schedule.from}}</h6>
                                     <img class="icon-plane" src="../../assets/airplane-icon.png" alt="icon">
-                                    <h6 class="to-country">JPN</h6>
+                                    <h6 class="to-country">{{detailTicket.schedule.to}}</h6>
                                 </div>
                                 <button type="submit">Eticket issued</button>
                                 <hr class="horizontal">
@@ -22,34 +22,33 @@
                                     <div class="code-class">
                                         <div class="code">
                                             <h6>Code</h6>
-                                            <h5>AB-221</h5>
+                                            <h5>{{detailTicket.schedule.code}}</h5>
                                         </div>
                                         <div class="class">
                                             <h6>Class</h6>
-                                            <h5>Economy</h5>
+                                            <h5>{{detailTicket.schedule.airlineClass}}</h5>
                                         </div>
                                     </div>
                                     <div class="terminal-gate">
                                         <div class="terminal">
                                             <h6>Terminal</h6>
-                                            <h5>A</h5>
+                                            <h5>{{detailTicket.schedule.terminal}}</h5>
                                         </div>
                                         <div class="gate">
                                             <h6>Gate</h6>
-                                            <h5>221</h5>
+                                            <h5>{{detailTicket.schedule.gate}}</h5>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="departure">
                                     <h6>Departure</h6>
-                                    <h5>Monday, 20 July '20 - 12:33</h5>
+                                    <h5>{{setDate(detailTicket.schedule.departureTime)}}</h5>
                                 </div>
                             </div>
                             <div class="col-lg-5 barcode">
                                 <div class="vertical"></div>
                                 <div class="qr-code">
-                                    <!-- <qrcode-vue :value="value" :size="size" level="H"></qrcode-vue> -->
-                                    <img src="../../assets/qr-code.png" alt="">
+                                    <qrcode-vue :value="detailTicket.id" :size="size" level="H"></qrcode-vue>
                                 </div>
                             </div>
                         </div>
@@ -61,13 +60,35 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import moment from 'moment'
+import QrcodeVue from 'qrcode.vue'
 export default {
   name: 'BookingDetail',
   data () {
     return {
-      value: 'halo semua',
       size: 200
     }
+  },
+  components: {
+    QrcodeVue
+  },
+  methods: {
+    ...mapActions(['getDetailTicket']),
+    myDetailTicket () {
+      const id = this.$route.params.ticketId
+      console.log('id ticket', id)
+      this.getDetailTicket(id)
+    },
+    setDate (date) {
+      return moment(date).format('MMMM Do YYYY, hh:mm a')
+    }
+  },
+  computed: {
+    ...mapGetters(['detailTicket'])
+  },
+  mounted () {
+    this.myDetailTicket()
   }
 }
 </script>
