@@ -132,7 +132,7 @@
                                     <p class="amount">Rp.{{schedule.price}}</p>
                                 </div>
                                 <div class="boxselect">
-                                    <button class="selectedticket">Select</button>
+                                    <button @click="$router.push({ path: `/main/flight-detail/${schedule.id}` })" class="selectedticket">Select</button>
                                 </div>
                             </div>
                         </div>

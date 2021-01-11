@@ -21,7 +21,8 @@ export default new Vuex.Store({
     scheduleById: [],
     ticket: {},
     detailTicket: {},
-    pagination: {}
+    pagination: {},
+    history: {}
   },
   mutations: {
     togglePassword (state) {
@@ -55,6 +56,17 @@ export default new Vuex.Store({
     set_detail_ticket (state, payload) {
       state.detailTicket = payload
     },
+    remove (state) {
+      state.users = []
+      state.id = null
+      state.token = null
+      state.ticket = {}
+      state.schedule = []
+      state.role = null
+      state.userProfile = {}
+      state.history = {}
+      state.scheduleById = []
+    },
     SET_USER_BY_ID (state, payload) {
       state.userProfile = payload
       state.schedule = []
@@ -66,14 +78,12 @@ export default new Vuex.Store({
     SET_SCHEDULE_BY_ID (state, payload) {
       state.scheduleById = payload
     },
-    remove (state) {
-      state.users = []
-      state.id = null
-      state.token = null
+    SET_HISTORY (state, payload) {
+      state.history = payload
+    },
+    REMOVE_HISTORY (state, payload) {
+      state.history = {}
       state.ticket = {}
-      state.schedule = []
-      state.role = null
-      state.userProfile = {}
     }
   },
   actions: {
@@ -214,6 +224,31 @@ export default new Vuex.Store({
             console.log('isi get ticket', result)
             context.commit('set_ticket', result)
             resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    getHistory (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/tickets/history/${localStorage.getItem('id')}`)
+          .then(res => {
+            const result = res.data.history.tickets
+            console.log('DATA GET HISTORY :', result)
+            context.commit('SET_HISTORY', result)
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    deleteHistory (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`${process.env.VUE_APP_URL_BACKEND}/tickets/history/${payload}`)
+          .then(res => {
+            resolve(res)
           })
           .catch(err => {
             reject(err)
@@ -371,6 +406,9 @@ export default new Vuex.Store({
     },
     pagination (state) {
       return state.pagination
+    },
+    history (state) {
+      return state.history
     }
   },
   modules: {

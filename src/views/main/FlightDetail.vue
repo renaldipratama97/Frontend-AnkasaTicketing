@@ -44,7 +44,7 @@
                 <div class="card">
                     <div class="box-payment">
                         <div class="airlines">
-                            <img :src="scheduleById.airlinesLogo" alt="airlines-logo">
+                            <img :src="scheduleById.airlineLogo" alt="airlines-logo">
                             <span>{{scheduleById.airline}}</span>
                         </div>
                         <div class="from-to">
@@ -215,6 +215,7 @@ export default {
   mounted () {
     this.getUserById()
     this.getParamsSchedule()
+    console.log(this.scheduleById)
   },
   computed: {
     ...mapGetters(['userProfile', 'scheduleById'])
