@@ -5,11 +5,11 @@
                 <div class="boxprofile">
                     <div class="boxuser">
                         <div class="boxphoto">
-                            <img src="../../assets/profile.png" alt="image1">
+                            <img :src="userProfile.avatar" alt="image1">
                         </div>
                         <button class="selectphoto">Select Photo</button>
-                        <p class="name">Mike Kowalski</p>
-                        <p class="location">Medan, Indonesia</p>
+                        <p class="name">{{userProfile.fullName}}</p>
+                        <p class="location">{{userProfile.address}}</p>
                     </div>
                     <div class="addcard">
                         <p>Cards</p>
@@ -37,16 +37,21 @@
                         <p class="title6">History</p>
                     </div>
                     <div class="line"></div>
-                    <div class="boxhistory">
-                        <p class="schedule">Monday, 20 July '20 - 12:33</p>
+                    <div class="boxhistory" v-for="dataHistory in history" :key="dataHistory.id">
+                        <div class="box-schedule">
+                        <p class="schedule">{{formatDay(dataHistory.schedule.departureTime)}}, {{formatDate(dataHistory.schedule.departureTime)}}  - {{formatJam(dataHistory.schedule.departureTime)}}</p>
                         <div class="historyticket">
-                            <p class="departurefrom">IDN</p>
+                            <p class="departurefrom">{{dataHistory.schedule.from}}</p>
                             <img src="../../assets/airplane-icon.png" alt="image2">
-                            <p class="arriveto">JPN</p>
+                            <p class="arriveto">{{dataHistory.schedule.to}}</p>
                         </div>
-                        <p class="nameairlinescode">Garuda Indonesia, AB-221</p>
+                        <p class="nameairlinescode">{{dataHistory.schedule.airline}}, {{dataHistory.schedule.code}}</p>
                         <button class="viewdetails">View Details</button>
-                        <div class="line"></div>
+                        <!-- <div class="line"></div> -->
+                        </div>
+                        <div class="delete-icon" @click.prevent="deleteHistoryMethod(dataHistory.id)">
+                            <img src="../../assets/trash.svg" alt="delete-icon">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,8 +60,51 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Swal from 'sweetalert2'
+import moment from 'moment'
+moment.locale('id')
+
 export default {
-  name: 'History'
+  name: 'History',
+  data () {
+    return {
+
+    }
+  },
+  mounted () {
+    this.getUserById()
+    this.getHistory()
+  },
+  methods: {
+    ...mapActions(['getUserById', 'getHistory', 'deleteHistory']),
+    ...mapMutations(['REMOVE_HISTORY']),
+    formatJam (date) {
+      return moment(date).format('LT')
+    },
+    formatDay (date) {
+      return moment(date).format('dddd')
+    },
+    formatDate (date) {
+      return moment(date).format('LL')
+    },
+    deleteHistoryMethod (id) {
+      this.deleteHistory(id)
+        .then(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'History deleted successfully',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.REMOVE_HISTORY()
+          this.getHistory()
+        })
+    }
+  },
+  computed: {
+    ...mapGetters(['userProfile', 'history'])
+  }
 }
 </script>
 
@@ -329,12 +377,29 @@ export default {
     color: #000000;
 }
 
+.boxhistory {
+    display: flex;
+}
+
+.delete-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    border-bottom: 1px solid #E6E6E6;
+    cursor: pointer;
+}
+
+.box-schedule {
+    width: 100%;
+    border-bottom: 1px solid #E6E6E6;
+}
+
 .schedule {
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
-
     color: #000000;
 }
 

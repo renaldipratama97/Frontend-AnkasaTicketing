@@ -100,8 +100,8 @@ export default {
     ...mapGetters(['userProfile', 'ticket'])
   },
   mounted () {
-    this.getUserById()
     this.myTicket()
+    this.getUserById()
   }
 }
 </script>

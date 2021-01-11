@@ -19,7 +19,8 @@ export default new Vuex.Store({
     userProfile: {},
     schedules: [],
     scheduleById: [],
-    ticket: {}
+    ticket: {},
+    history: {}
   },
   mutations: {
     togglePassword (state) {
@@ -52,6 +53,8 @@ export default new Vuex.Store({
       state.schedule = []
       state.role = null
       state.userProfile = {}
+      state.history = {}
+      state.scheduleById = []
     },
     SET_USER_BY_ID (state, payload) {
       state.userProfile = payload
@@ -63,6 +66,13 @@ export default new Vuex.Store({
     },
     SET_SCHEDULE_BY_ID (state, payload) {
       state.scheduleById = payload
+    },
+    SET_HISTORY (state, payload) {
+      state.history = payload
+    },
+    REMOVE_HISTORY (state, payload) {
+      state.history = {}
+      state.ticket = {}
     }
   },
   actions: {
@@ -209,6 +219,31 @@ export default new Vuex.Store({
           })
       })
     },
+    getHistory (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/tickets/history/${localStorage.getItem('id')}`)
+          .then(res => {
+            const result = res.data.history.tickets
+            console.log('DATA GET HISTORY :', result)
+            context.commit('SET_HISTORY', result)
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    deleteHistory (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.delete(`${process.env.VUE_APP_URL_BACKEND}/tickets/history/${payload}`)
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     getSchedules (context, payload) {
       return new Promise((resolve, reject) => {
         axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules`)
@@ -340,6 +375,9 @@ export default new Vuex.Store({
     },
     ticket (state) {
       return state.ticket
+    },
+    history (state) {
+      return state.history
     }
   },
   modules: {
