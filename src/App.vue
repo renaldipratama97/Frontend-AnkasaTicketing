@@ -7,7 +7,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  namw: 'App',
+  name: 'App',
   methods: {
     ...mapActions(['interceptorResponse', 'interceptorRequest'])
   },

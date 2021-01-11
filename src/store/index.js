@@ -141,9 +141,10 @@ export default new Vuex.Store({
           })
       })
     },
-    updateAvatar (context, payload) {
+    updateAvatar ({ dispatch }, payload) {
+      console.log(payload.get('avatar'))
       return new Promise((resolve, reject) => {
-        axios.patch(`${process.env.VUE_APP_URL_BACKEND}/users/${payload.id}`, payload.formData)
+        axios.patch(`${process.env.VUE_APP_URL_BACKEND}/users/${payload.get('id')}`, payload)
           .then(res => {
             console.log(payload)
             Swal.fire({
@@ -152,6 +153,9 @@ export default new Vuex.Store({
               showConfirmButton: false,
               timer: 1500
             })
+            console.log(res.data)
+
+            dispatch('getUserById')
           })
           .catch(err => {
             Swal.fire({
@@ -160,6 +164,7 @@ export default new Vuex.Store({
               showConfirmButton: false,
               timer: 1500
             })
+            console.log(err.response.data)
             reject(err)
           })
       })
@@ -184,7 +189,7 @@ export default new Vuex.Store({
           })
       })
     },
-    getUserById (context, payload) {
+    getUserById (context) {
       return new Promise((resolve, reject) => {
         axios.get(`${process.env.VUE_APP_URL_BACKEND}/users/${localStorage.id}`)
           .then(res => {
