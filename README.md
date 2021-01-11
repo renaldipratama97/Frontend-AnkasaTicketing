@@ -26,6 +26,6 @@ VUE_APP_URL_BACKEND = http://localhost:5000/api
 # Author
 This project was built by :
 * [Ahmad Syauqi](https://github.com/syauqeesy)
-* [Shaula Jaminetya Saga](https://github.com/sjasminetya)
+* [Shaula Jasminetya Saga](https://github.com/sjasminetya)
 * [Renaldi Pratama Tumanggor](https://github.com/renaldipratama97)
 * [Eggy Atma Riansyah](https://github.com/eggyatma2908)
