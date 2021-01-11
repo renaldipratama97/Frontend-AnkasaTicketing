@@ -101,7 +101,7 @@
         </div>
         <div class="container">
           <div class="row">
-            <di class="col-lg-2">
+            <div class="col-lg-2">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -114,8 +114,8 @@
                   </div>
                 </div>
               </div>
-            </di>
-            <di class="col-lg-2 box-card">
+            </div>
+            <div class="col-lg-2 box-card">
               <div class="box-photo-barcelona">
                 <div class="number-plane">
                   <h6 class="airlines"><span>22</span> Airlines</h6>
@@ -128,8 +128,8 @@
                   </div>
                 </div>
               </div>
-            </di>
-            <di class="col-lg-2 box-card">
+            </div>
+            <div class="col-lg-2 box-card">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -142,8 +142,8 @@
                   </div>
                 </div>
               </div>
-            </di>
-            <di class="col-lg-2 box-card">
+            </div>
+            <div class="col-lg-2 box-card">
               <div class="box-photo-barcelona">
                 <div class="number-plane">
                   <h6 class="airlines"><span>22</span> Airlines</h6>
@@ -156,8 +156,8 @@
                   </div>
                 </div>
               </div>
-            </di>
-            <di class="col-lg-2 box-card">
+            </div>
+            <div class="col-lg-2 box-card">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -170,7 +170,7 @@
                   </div>
                 </div>
               </div>
-            </di>
+            </div>
           </div>
         </div>
       </section>
