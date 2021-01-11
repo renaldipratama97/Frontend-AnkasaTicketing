@@ -39,6 +39,9 @@ export default new Vuex.Store({
     set_schedule (state, payload) {
       state.schedule = payload
     },
+    set_schedules (state, payload) {
+      state.schedules = payload
+    },
     set_role (state, payload) {
       state.role = payload
     },
@@ -162,7 +165,7 @@ export default new Vuex.Store({
             resolve(result)
           })
           .catch(err => {
-            console.log(err.response)
+            console.log(err)
             reject(err)
           })
       })
@@ -213,19 +216,6 @@ export default new Vuex.Store({
           })
       })
     },
-    getSchedules (context, payload) {
-      return new Promise((resolve, reject) => {
-        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules`)
-          .then(res => {
-            const result = res.data.schedules
-            context.commit('SET_SCHEDULES', result)
-            resolve(res)
-          })
-          .catch(err => {
-            reject(err)
-          })
-      })
-    },
     getSchedulesById (context, payload) {
       return new Promise((resolve, reject) => {
         axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules/${payload.id}`)
@@ -249,6 +239,19 @@ export default new Vuex.Store({
           })
           .catch(err => {
             reject(err)
+          })
+      })
+    },
+    getSchedules (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules?transit=${payload.transit || ''}&facility=${payload.facility || ''}&airline=${payload.airline || ''}&keyword=${payload.keyword || ''}`)
+          .then(res => {
+            const result = res.data.schedules
+            context.commit('set_schedules', result)
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err.response.data)
           })
       })
     },

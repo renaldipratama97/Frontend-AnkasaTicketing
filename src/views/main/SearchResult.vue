@@ -43,15 +43,11 @@
                             </div>
                             <div class="direct">
                                 <label for="direct">Direct</label>
-                                <input id="direct" type="radio" name="transit" value="direct">
+                                <input id="direct" type="radio" name="transit" v-model="transit" value="Direct" @change="handleClick">
                             </div>
                             <div class="transit">
                                 <label for="transit">Transit</label>
-                                <input id="transit" type="radio" name="transit" value="transit">
-                            </div>
-                            <div class="transit2">
-                                <label for="transit2+">Transit 2+</label>
-                                <input id="transit2+" type="radio" name="transit" value="transit2">
+                                <input id="transit" type="radio" name="transit" v-model="transit" value="Transit" @change="handleClick">
                             </div>
                         <div class="line"></div>
                         </div>
@@ -62,64 +58,18 @@
                             </div>
                             <div class="luggage">
                                 <label for="luggage">Luggage</label>
-                                <input id="luggage" type="radio" name="facilities" value="luggage">
+                                <input id="luggage" type="radio" name="facility" v-model="facility" value="Luggage" @change="handleClick">
                             </div>
                             <div class="inflightmeal">
                                 <label for="inflightmeal">In-Flight Meal</label>
-                                <input id="inflightmeal" type="radio" name="facilities" value="inflightmeal">
+                                <input id="inflightmeal" type="radio" name="facility" v-model="facility" value="In-Flight Meal" @change="handleClick">
                             </div>
                             <div class="wifi">
                                 <label for="wifi">Wi-fi</label>
-                                <input id="wifi" type="radio" name="facilities" value="wifi">
+                                <input id="wifi" type="radio" name="facility" v-model="facility" value="Wi-Fi" @change="handleClick">
                             </div>
                             <div class="line"></div>
                         </div>
-                        <!-- <div class="filter">
-                            <div class="title2">
-                                <p class="text1">Departure Time</p>
-                                <img class="buttonup" src="../../assets/buttonup.png" alt="image5">
-                            </div>
-                            <div class="time">
-                                <label for="time1">00:00 - 06:00</label>
-                                <input id="time1" type="radio" name="departuretime" value="time1">
-                            </div>
-                            <div class="time">
-                                <label for="time2">06:00 - 12:00</label>
-                                <input id="time2" type="radio" name="departuretime" value="time2">
-                            </div>
-                            <div class="time">
-                                <label for="time3">12:00 - 18:00</label>
-                                <input id="time3" type="radio" name="departuretime" value="time3">
-                            </div>
-                            <div class="timelast">
-                                <label for="time4">18:00 - 24:00</label>
-                                <input id="time4" type="radio" name="departuretime" value="time4">
-                            </div>
-                            <div class="line"></div>
-                        </div>
-                        <div class="filter">
-                            <div class="title2">
-                                <p class="text1">Time Arrived</p>
-                                <img class="buttonup" src="../../assets/buttonup.png" alt="image6">
-                            </div>
-                            <div class="time">
-                                <label for="time5">00:00 - 06:00</label>
-                                <input id="time5" type="radio" name="timearrived" value="time5">
-                            </div>
-                            <div class="time">
-                                <label for="time6">06:00 - 12:00</label>
-                                <input id="time6" type="radio" name="timearrived" value="time6">
-                            </div>
-                            <div class="time">
-                                <label for="time7">12:00 - 18:00</label>
-                                <input id="time7" type="radio" name="timearrived" value="time7">
-                            </div>
-                            <div class="timelast">
-                                <label for="time8">18:00 - 24:00</label>
-                                <input id="time8" type="radio" name="timearrived" value="time8">
-                            </div>
-                            <div class="line"></div>
-                        </div> -->
                         <div class="filter">
                             <div class="title2">
                                 <p class="text1">Airlines</p>
@@ -127,75 +77,63 @@
                             </div>
                             <div class="garudaindonesia">
                                 <label for="garudaindonesia">Garuda Indonesia</label>
-                                <input id="garudaindonesia" type="radio" name="airlines" value="garudaindonesia">
+                                <input id="garudaindonesia" type="radio" name="airline" v-model="airline" value="Garuda Indonesia" @change="handleClick">
                             </div>
                             <div class="airasia">
                                 <label for="airasia">Air Asia</label>
-                                <input id="airasia" type="radio" name="airlines" value="airasia">
+                                <input id="airasia" type="radio" name="airline" v-model="airline" value="Air Asia" @change="handleClick">
                             </div>
                             <div class="lionair">
                                 <label for="lionair">Lion Air</label>
-                                <input id="lionair" type="radio" name="airlines" value="lionair">
+                                <input id="lionair" type="radio" name="airline" v-model="airline" value="Lion Air" @change="handleClick">
                             </div>
                             <div class="line"></div>
                         </div>
-                        <!-- <div class="filter">
-                            <div class="title2">
-                                <p class="text1">Ticket Price</p>
-                                <img class="buttonup" src="../../assets/buttonup.png" alt="image7">
-                            </div>
-                            <div class="slidecontainer">
-                                <div class="range">
-                                    <p>Lowest</p>
-                                    <p>Highest</p>
-                                </div>
-                                <input type="range" min="1" max="100" v-model="value" class="slider" id="myRange">
-                                <p class="price">{{handleValue}}</p>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div class="col-lg-8">
                     <div class="selectticket">
                         <div class="title3">
                             <p class="text2">Select Ticket</p>
-                            <p class="foundticket">(6 flight found)</p>
+                            <p class="foundticket">({{schedules.length}} flight found)</p>
                         </div>
                         <button class="sort">Sort by</button>
                     </div>
-                    <div class="boxticket" v-for="data in schedules" :key="data.id">
-                        <div class="boxairlines">
-                            <img class="logoairlines" :src="data.airlineLogo" alt="image8">
-                            <p class="nameairlines">{{data.airline}}</p>
-                        </div>
-                        <div class="destinationtime">
-                            <div class="boxdeparture">
-                                <div class="from">
-                                    <p class="departurefrom">{{data.from}}</p>
-                                    <p class="departuretime">12:23</p>
+                    <div class="boxticket" v-for="schedule in schedules" :key="schedule.id">
+                        <div class="box">
+                            <div class="boxairlines">
+                                <img class="logoairlines" :src="schedule.airlineLogo" alt="image8">
+                                <p class="nameairlines">{{schedule.airline}}</p>
+                            </div>
+                            <div class="destinationtime">
+                                <div class="boxdeparture">
+                                    <div class="from">
+                                        <p class="departurefrom">{{schedule.from}}</p>
+                                        <p class="departuretime">{{moment(schedule.departureTime).format('hh:mm')}}</p>
+                                    </div>
+                                    <img class="iconplane" src="../../assets/iconplane.png" alt="image9">
+                                    <div class="to">
+                                        <p class="arriveto">{{schedule.to}}</p>
+                                        <p class="timearrive">{{moment(schedule.arrivedTime).format('hh:mm')}}</p>
+                                    </div>
                                 </div>
-                                <img class="iconplane" src="../../assets/iconplane.png" alt="image9">
-                                <div class="to">
-                                    <p class="arriveto">{{data.to}}</p>
-                                    <p class="timearrive">15:21</p>
+                                <div class="boxtimearrived">
+                                    <p class="timearrived">{{moment.utc(moment(schedule.arrivedTime).diff(moment(schedule.departureTime))).format("H") + ' hours ' + moment.utc(moment(schedule.arrivedTime).diff(moment(schedule.departureTime))).format("mm") + ' minutes'}}</p>
+                                    <p class="transit">({{schedule.transit}})</p>
                                 </div>
-                            </div>
-                            <div class="boxtimearrived">
-                                <p class="timearrived">3 hours 11 minutes</p>
-                                <p class="transit">{{data.transit}}</p>
-                            </div>
-                            <div class="boxfacilities">
-                                <button class="suitcase"></button>
-                                <button class="meal"></button>
-                                <button class="wi-fi"></button>
-                            </div>
-                            <div>
-                                <p class="amount">Rp.{{data.price}}</p>
-                            </div>
-                            <div class="boxselect">
-                                <router-link :to="{ path: `/main/flight-detail/${data.id}`}">
-                                <button class="selectedticket">Select</button>
-                                </router-link>
+                                <div class="boxfacility">
+                                    <div class="boxfacilities" v-for="(facility, index) in schedule.facilities" :key="index">
+                                        <p :class="facility.facility === luggage ? 'suitcase' : null" :value="luggage"></p>
+                                        <p :class="facility.facility === meal ? 'meal' : null" :value="meal"></p>
+                                        <p :class="facility.facility === wifi ? 'wi-fi' : null" :value="wifi"></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="amount">Rp.{{schedule.price}}</p>
+                                </div>
+                                <div class="boxselect">
+                                    <button class="selectedticket">Select</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,27 +144,58 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
+import Swal from 'sweetalert2'
+
 export default {
   name: 'SearchResult',
   data () {
     return {
-      value: 50
+      transit: '',
+      airline: '',
+      facility: '',
+      moment: moment,
+      luggage: 'Luggage',
+      meal: 'In-Flight Meal',
+      wifi: 'Wi-Fi'
+    }
+  },
+  methods: {
+    ...mapActions(['getSchedules']),
+    handleClick () {
+      this.$router.push({ path: `/main/search-result?transit=${this.transit || ''}&facility=${this.facility || ''}&airline=${this.airline || ''}` })
+        .catch(() => {
+
+        })
+    }
+  },
+  computed: {
+    ...mapGetters(['schedules'])
+  },
+  watch: {
+    $route () {
+      this.getSchedules({
+        transit: this.$route.query.transit || '',
+        facility: this.$route.query.facility || '',
+        airline: this.$route.query.airline || '',
+        keyword: this.$route.query.keyword || ''
+      })
+        .catch((err) => {
+          Swal.fire(
+            err.status,
+            err.message,
+            'error'
+          )
+          this.$router.push({ path: '/main/search-result' })
+        })
     }
   },
   mounted () {
-    this.getSchedules()
+    this.getSchedules({
+      keyword: this.$route.query.keyword || ''
+    })
     console.log(this.schedules)
-  },
-  methods: {
-    ...mapActions(['getSchedules'])
-  },
-  computed: {
-    ...mapGetters(['schedules']),
-    handleValue () {
-      const price = 'Rp.' + this.value * 100000
-      return price
-    }
   }
 }
 </script>
@@ -496,7 +465,8 @@ input[type="range" i] {
 
 .boxticket {
     background: white;
-    padding: 30px;
+    padding: 25px;
+    margin-bottom: 10px;
     border-radius: 15px;
 }
 
@@ -601,28 +571,30 @@ input[type="range" i] {
     color: #6B6B6B;
 }
 
+.boxfacility {
+    display: flex;
+}
+
 .boxfacilities {
     width: max-content;
     height: max-content;
-    margin-top: 10px;
 }
 
 .suitcase {
     width: 15px;
     height: 21px;
-    margin-right: 10px;
+    margin: 15px 5px;
     border: none;
     background: none;
     background-image: url('../../assets/iconsuitcase.png');
     background-repeat: no-repeat;
-    background-position: center;
     outline: none;
 }
 
 .meal {
     width: 22px;
     height: 20px;
-    margin-right: 10px;
+    margin: 5px;
     border: none;
     background: none;
     background-image: url('../../assets/iconfood.png');
@@ -633,6 +605,7 @@ input[type="range" i] {
 .wi-fi {
     width: 22px;
     height: 20px;
+    margin: 5px;
     border: none;
     background: none;
     background-image: url('../../assets/iconwifi.png');
@@ -699,9 +672,6 @@ input[type="range" i] {
     }
     .destinationtime {
         flex-direction: column;
-    }
-    .boxfacilities {
-        margin-top: 15px;
     }
 }
 

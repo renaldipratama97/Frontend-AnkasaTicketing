@@ -6,7 +6,7 @@
                 <h1>Ankasa</h1>
             </div>
             <div class="boxsearch">
-                <input class="search" style="background: #F5F5F5;" type="text" placeholder="Where you want to go?">
+                <input class="search" style="background: #F5F5F5;" type="text" v-model="keyword" placeholder="Where you want to go?" @keypress.enter="searchSchedule">
                 <img class="iconsearch" src="../../assets/search.png" alt="image2">
             </div>
             <div class="boxlink">
@@ -40,8 +40,20 @@ import { mapGetters, mapActions } from 'vuex'
 import { Slide } from 'vue-burger-menu'
 export default {
   name: 'Header',
+  data () {
+    return {
+      keyword: ''
+    }
+  },
   methods: {
-    ...mapActions(['getUserById'])
+    ...mapActions(['getUserById']),
+    searchSchedule () {
+      this.$router.push({ path: `/main/search-result?keyword=${this.keyword || ''}` })
+        .catch(() => {
+
+        })
+      this.keyword = ''
+    }
   },
   components: {
     Slide
