@@ -378,6 +378,14 @@ main .box-search .departure {
   margin-left: 20px;
 }
 
+main .box-search .button-function .btn-one-way img {
+  margin-left: -10px;
+}
+
+main .box-search .button-function .btn-round-trip img {
+  margin-left: -10px;
+}
+
 main .box-search .button-function .btn-one-way,
 main .box-search .button-function .btn-round-trip {
   background: #2395FF;
@@ -663,6 +671,12 @@ main section.top-destination .button .btn-next {
   box-shadow: 0px 8px 10px rgba(255, 255, 255, 0.2);
   border: none;
   margin-left: 30px;
+}
+
+@media(max-width: 1192px) {
+  main .box-search {
+    left: 500px;
+  }
 }
 
 </style>
