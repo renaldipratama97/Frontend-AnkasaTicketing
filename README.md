@@ -1,5 +1,5 @@
 # Frontend Ankasa Ticketing
-This is a code frontend ticket project created using vue js, inside it has several end points such as user profile, flight ticket search, airline ticket booking, ticket booking details, airplane details, schedule creation for admin and ticket booking history.
+This is a frontend ticketing project created using vue JS, in which it has several pages such as user profiles, airline ticket search, airline ticket booking, ticket booking details, flight details, scheduling for admin and ticket booking history.
 
 # Installation
 ```
