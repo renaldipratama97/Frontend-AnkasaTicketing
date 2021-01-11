@@ -12,10 +12,17 @@ import Profile from '../views/main/Profile.vue'
 import FlightDetail from '../views/main/FlightDetail.vue'
 import AddSchedule from '../views/main/AddSchedule.vue'
 import History from '../views/main/History.vue'
+import LandingPage from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/explore',
+    name: 'LandingPage',
+    component: LandingPage,
+    meta: { requiresAuth: false }
+  },
   {
     path: '/auth',
     name: 'Auth',

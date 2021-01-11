@@ -14,21 +14,27 @@
                 <router-link class="mybooking" to="/main/my-booking">My Booking</router-link>
                 <router-link to="/main/admin/add-schedule" :class="userProfile.role === isAdmin ? 'mybooking' : 'admin'">Add Schedule</router-link>
             </div>
-            <div class="boxnotif">
+            <div class="button" v-if="!isLogin">
+                <button type="submit" class="btn btn-signup" @click="goSignUp">Sign Up</button>
+            </div>
+            <div class="boxnotif" v-if="isLogin">
                 <a href="#"><img class="message" src="../../assets/iconmessage.png" alt="image3"></a>
                 <a href="#"><img class="bell" src="../../assets/bell.png" alt="image4"></a>
             </div>
-            <div class="boxprofile">
+            <div class="boxprofile" v-if="isLogin">
                 <router-link to="/main/profile"><img class="photo" :src="userProfile.avatar" alt="image4"></router-link>
             </div>
             <div class="slide">
             <Slide right id="bm-burger-button">
-                <router-link id="profile" class="profile" to="/main/profile"><span>Profile</span></router-link>
+                <router-link v-if="isLogin" id="profile" class="profile" to="/main/profile"><span>Profile</span></router-link>
                 <router-link id="findtickets" class="findtickets" :to="{ path: '/main/search-result' }"><span>Find Ticket</span></router-link>
                 <router-link id="mybookings" class="mybookings" to="/main/my-booking"><span>My Booking</span></router-link>
                 <router-link to="/main/admin/add-schedule" id="mybookings" :class="userProfile.role === isAdmin ? 'user' : 'admin'"><span>Add Schedule</span></router-link>
-                <a id="messages" class="messages" href="#"><span>Message</span></a>
-                <a id="notification" class="notification" href="#"><span>Notification</span></a>
+                <a id="messages" v-if="isLogin" class="messages" href="#"><span>Message</span></a>
+                <a id="notification" v-if="isLogin" class="notification" href="#"><span>Notification</span></a>
+                <div class="button" v-if="!isLogin">
+                    <button type="submit" class="btn btn-signup" @click="goSignUp">Sign Up</button>
+                </div>
             </Slide>
             </div>
         </div>
@@ -41,17 +47,21 @@ import { Slide } from 'vue-burger-menu'
 export default {
   name: 'Header',
   methods: {
-    ...mapActions(['getUserById'])
+    ...mapActions(['getUserById']),
+    goSignUp () {
+      this.$router.push('/auth/register')
+    }
   },
   components: {
     Slide
   },
   computed: {
-    ...mapGetters(['userProfile', 'isAdmin'])
+    ...mapGetters(['userProfile', 'isAdmin', 'isLogin'])
   },
   mounted () {
-    this.getUserById()
-    console.log('diambil di state', this.isAdmin)
+    if (this.isLogin) {
+      this.getUserById()
+    }
   }
 }
 </script>
@@ -190,6 +200,27 @@ export default {
     border-radius: 100px;
 }
 
+button {
+    background: #2395FF;
+    box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+    width: 150px;
+    height: 50px;
+}
+
+button:hover {
+    color: #FFFFFF;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 @media (max-width: 1074px) {
     .boxlink {
         display: none;
@@ -199,6 +230,9 @@ export default {
     }
     .slide {
         display: flex;
+    }
+    .button {
+        display: none;
     }
 }
 
