@@ -240,7 +240,7 @@ export default new Vuex.Store({
             resolve(result)
           })
           .catch(err => {
-            reject(err)
+            reject(err.response.data)
           })
       })
     },
@@ -368,7 +368,7 @@ export default new Vuex.Store({
           } else if (error.response.data.message === 'Bookings not found!') {
             Swal.fire({
               icon: 'error',
-              title: 'you have not bought the ticket yet',
+              title: 'Data not found',
               showConfirmButton: false,
               timer: 2000
             })

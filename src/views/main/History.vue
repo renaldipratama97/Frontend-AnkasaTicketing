@@ -75,6 +75,9 @@ export default {
   mounted () {
     this.getUserById()
     this.getHistory()
+      .catch(() => {
+        this.$router.push({ path: '/main/my-booking' })
+      })
   },
   methods: {
     ...mapActions(['getUserById', 'getHistory', 'deleteHistory']),
