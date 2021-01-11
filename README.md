@@ -22,3 +22,10 @@ VUE_APP_URL_BACKEND = http://localhost:5000/api
 <img src="https://user-images.githubusercontent.com/26200397/104166205-017a8400-542d-11eb-96ed-8cf5c7d9cdb2.png" width="300">
 <img src="https://user-images.githubusercontent.com/26200397/104165156-90869c80-542b-11eb-807b-f2adbe33a9d0.png" width="300">
  </div>
+
+# Author
+This project was built by :
+* [Ahmad Syauqi](https://github.com/syauqeesy)
+* [Shaula Jaminetya Saga](https://github.com/sjasminetya)
+* [Renaldi Pratama Tumanggor](https://github.com/renaldipratama97)
+* [Eggy Atma Riansyah](https://github.com/eggyatma2908)
