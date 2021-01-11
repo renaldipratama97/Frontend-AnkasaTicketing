@@ -102,7 +102,7 @@ router.beforeEach((to, from, next) => {
       const role = localStorage.getItem('role')
       console.log('isi role', role)
       if (to.matched.some(record => record.meta.requiresAdmin)) {
-        if (role === 'Admin') {
+        if (role === 'admin') {
           next()
         } else {
           next({

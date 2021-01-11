@@ -137,6 +137,21 @@
                             </div>
                         </div>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item" :class="{disabled: !pagination.previousPage}">
+                            <router-link class="page-link" :to="{ path: `/main/search-result?transit=${this.$route.query.transit || ''}&facility=${this.$route.query.facility || ''}&airline=${this.$route.query.airline || ''}&page=${pagination.previousPage}` }" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </router-link>
+                            </li>
+                            <li class="page-item"><a class="page-link">{{ pagination.currentPage }}</a></li>
+                            <li class="page-item" :class="{disabled: !pagination.nextPage}">
+                            <router-link class="page-link" :to="{ path: `/main/search-result?transit=${this.$route.query.transit || ''}&facility=${this.$route.query.facility || ''}&airline=${this.$route.query.airline || ''}&page=${pagination.nextPage}` }" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </router-link>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -171,7 +186,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['schedules'])
+    ...mapGetters(['schedules', 'pagination'])
   },
   watch: {
     $route () {
@@ -179,7 +194,8 @@ export default {
         transit: this.$route.query.transit || '',
         facility: this.$route.query.facility || '',
         airline: this.$route.query.airline || '',
-        keyword: this.$route.query.keyword || ''
+        keyword: this.$route.query.keyword || '',
+        page: this.$route.query.page || 1
       })
         .catch((err) => {
           Swal.fire(
@@ -195,7 +211,7 @@ export default {
     this.getSchedules({
       keyword: this.$route.query.keyword || ''
     })
-    console.log(this.schedules)
+    console.log(this.pagination)
   }
 }
 </script>

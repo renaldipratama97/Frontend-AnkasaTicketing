@@ -20,7 +20,8 @@ export default new Vuex.Store({
     schedules: [],
     scheduleById: [],
     ticket: {},
-    detailTicket: {}
+    detailTicket: {},
+    pagination: {}
   },
   mutations: {
     togglePassword (state) {
@@ -47,6 +48,9 @@ export default new Vuex.Store({
     },
     set_ticket (state, payload) {
       state.ticket = payload
+    },
+    set_pagination (state, payload) {
+      state.pagination = payload
     },
     set_detail_ticket (state, payload) {
       state.detailTicket = payload
@@ -244,10 +248,12 @@ export default new Vuex.Store({
     },
     getSchedules (context, payload) {
       return new Promise((resolve, reject) => {
-        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules?transit=${payload.transit || ''}&facility=${payload.facility || ''}&airline=${payload.airline || ''}&keyword=${payload.keyword || ''}`)
+        axios.get(`${process.env.VUE_APP_URL_BACKEND}/schedules?transit=${payload.transit || ''}&facility=${payload.facility || ''}&airline=${payload.airline || ''}&keyword=${payload.keyword || ''}&page=${payload.page || 1}`)
           .then(res => {
             const result = res.data.schedules
+            const pagination = res.data.pagination
             context.commit('set_schedules', result)
+            context.commit('set_pagination', pagination)
             resolve(res)
           })
           .catch(err => {
@@ -345,10 +351,10 @@ export default new Vuex.Store({
       return state.userProfile
     },
     isAdmin (state) {
-      if (state.role === 'Admin') {
-        return 'Admin'
+      if (state.role === 'admin') {
+        return 'admin'
       } else {
-        return 'Admin'
+        return 'admin'
       }
     },
     schedules (state) {
@@ -362,6 +368,9 @@ export default new Vuex.Store({
     },
     detailTicket (state) {
       return state.detailTicket
+    },
+    pagination (state) {
+      return state.pagination
     }
   },
   modules: {
