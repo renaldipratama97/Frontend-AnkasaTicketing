@@ -4,7 +4,7 @@
     <main>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-6 mb-5">
+          <div class="col-lg-6 col-md-6 col-sm-6 mb-5">
             <div class="text-main col-md-8 offset-md-2">
               <h1>Find your <span class="flight">Flight</span> <span class="explore">and explore the world with us</span></h1>
             </div>
@@ -13,12 +13,12 @@
               <img src="../assets/vector-6.png" class="oval" alt="">
             </div>
           </div>
-          <div class="col-lg-6 text-right">
+          <div class="col-lg-6 col-md-6 col-sm-6 text-right">
             <img src="../assets/half-the-picture.png" alt="">
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4 box-search">
+          <div class="col-lg-4 col-md-5 box-search">
             <div class="question">
               <h6>Hey,</h6>
               <h6>Where you want to go?</h6>
@@ -88,10 +88,10 @@
       <section>
         <div class="container">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-md-12">
               <h6>Treding</h6>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12 col-md-12">
               <div class="trending-destination">
                 <h4>Trending Destination</h4>
                 <h5>View all</h5>
@@ -101,7 +101,7 @@
         </div>
         <div class="container">
           <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-2 col-md-3">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -115,7 +115,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2 box-card">
+            <div class="col-lg-2 col-md-3 box-card">
               <div class="box-photo-barcelona">
                 <div class="number-plane">
                   <h6 class="airlines"><span>22</span> Airlines</h6>
@@ -129,7 +129,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2 box-card">
+            <div class="col-lg-2 col-md-3 box-card">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -143,7 +143,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2 box-card">
+            <div class="col-lg-2 col-md-3 box-card">
               <div class="box-photo-barcelona">
                 <div class="number-plane">
                   <h6 class="airlines"><span>22</span> Airlines</h6>
@@ -157,7 +157,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-2 box-card">
+            <div class="col-lg-2 col-md-3 box-card">
               <div class="box-photo">
                 <div class="number-plane">
                   <h6 class="airlines"><span>15</span> Airlines</h6>
@@ -175,48 +175,52 @@
         </div>
       </section>
       <div class="container">
-        <section class="top-destination">
-          <h6 class="top-ten">Top 10</h6>
-          <p>Top 10 destinations</p>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-2">
-                <div class="box-top-destination">
-                  <img src="../assets/paris.png" alt="paris">
-                  <h3>Paris</h3>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <section class="top-destination">
+                <h6 class="top-ten">Top 10</h6>
+                <p>Top 10 destinations</p>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-2 col-md-3">
+                      <div class="box-top-destination">
+                        <img src="../assets/paris.png" alt="paris">
+                        <h3>Paris</h3>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                      <div class="box-top-destination">
+                        <img src="../assets/bali.png" alt="Bali">
+                        <h3>Bali</h3>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                      <div class="box-top-destination">
+                        <img src="../assets/singapore.png" alt="Singapore">
+                        <h3>Singapore</h3>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                      <div class="box-top-destination">
+                        <img src="../assets/agra.png" alt="Agra">
+                        <h3>Agra</h3>
+                      </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+                      <div class="box-top-destination">
+                        <img src="../assets/sydney.png" alt="Sydney">
+                        <h3>Sydney</h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="col-lg-2">
-                <div class="box-top-destination">
-                  <img src="../assets/bali.png" alt="Bali">
-                  <h3>Bali</h3>
+                <div class="button">
+                  <button class="btn btn-previous"><img src="../assets/previous.png" alt="previous"></button>
+                  <button class="btn btn-next"><img src="../assets/btnback.png" alt=""></button>
                 </div>
-              </div>
-              <div class="col-lg-2">
-                <div class="box-top-destination">
-                  <img src="../assets/singapore.png" alt="Singapore">
-                  <h3>Singapore</h3>
-                </div>
-              </div>
-              <div class="col-lg-2">
-                <div class="box-top-destination">
-                  <img src="../assets/agra.png" alt="Agra">
-                  <h3>Agra</h3>
-                </div>
-              </div>
-              <div class="col-lg-2">
-                <div class="box-top-destination">
-                  <img src="../assets/sydney.png" alt="Sydney">
-                  <h3>Sydney</h3>
-                </div>
-              </div>
-            </div>
+            </section>
           </div>
-          <div class="button">
-            <button class="btn btn-previous"><img src="../assets/previous.png" alt="previous"></button>
-            <button class="btn btn-next"><img src="../assets/btnback.png" alt=""></button>
-          </div>
-      </section>
+        </div>
       </div>
     </main>
     <Footer/>
@@ -607,6 +611,7 @@ main section.top-destination {
   background-repeat: no-repeat;
   object-fit: contain;
   height: 550px;
+  max-width: 100%;
 }
 
 main section.top-destination .top-ten {
@@ -676,6 +681,55 @@ main section.top-destination .button .btn-next {
 @media(max-width: 1192px) {
   main .box-search {
     left: 500px;
+    height: 800px;
+  }
+}
+
+@media(max-width: 1196px) {
+  main section .box-card {
+    margin-left: 80px;
+  }
+}
+
+@media(max-width: 1096px) {
+  main .box-search .button-function {
+    margin-left: 10px;
+  }
+
+  main .box-search .departure,
+  main .box-search .how-many {
+    margin-left: 10px;
+  }
+}
+
+@media(max-width: 1070px) {
+  main .box-search {
+    left: 400px;
+  }
+}
+
+@media(max-width: 988px) {
+  main .box-search {
+    width: 500px;
+  }
+
+  main section.top-destination {
+    width: 100%;
+  }
+
+  main section.top-destination .box-top-destination {
+    margin-left: 10px;
+  }
+}
+
+@media(max-width: 978px) {
+  main section.top-destination .box-top-destination {
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  main section.top-destination .button {
+    margin-top: 0%;
   }
 }
 
