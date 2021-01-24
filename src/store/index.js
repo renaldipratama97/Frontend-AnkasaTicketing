@@ -301,6 +301,40 @@ export default new Vuex.Store({
           })
       })
     },
+    forgotPassword (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${process.env.VUE_APP_URL_BACKEND}/users/forgotpassword`, payload)
+          .then(res => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Send mail success, please check your mail !!!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err.response.data)
+          })
+      })
+    },
+    changePassword (context, payload) {
+      return new Promise((resolve, reject) => {
+        axios.patch(`${process.env.VUE_APP_URL_BACKEND}/users/changepassword/${payload.id}`, payload)
+          .then(res => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Update password success',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            resolve(res)
+          })
+          .catch(err => {
+            reject(err.response.data)
+          })
+      })
+    },
     interceptorRequest () {
       axios.interceptors.request.use(function (config) {
         config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`

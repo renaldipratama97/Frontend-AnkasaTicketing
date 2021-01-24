@@ -4,6 +4,8 @@ import store from '../store/index'
 import Auth from '../views/auth/Auth.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
+import ForgotPassword from '../views/auth/ForgotPassword.vue'
+import ChangePassword from '../views/auth/ChangePassword.vue'
 import Main from '../views/main/Main.vue'
 import MyBooking from '../views/main/MyBooking.vue'
 import SearchResult from '../views/main/SearchResult.vue'
@@ -38,6 +40,18 @@ const routes = [
         path: 'register',
         name: 'Register',
         component: Register,
+        meta: { requiresVisitor: true }
+      },
+      {
+        path: 'forgot-password',
+        name: 'ForgotPassword',
+        component: ForgotPassword,
+        meta: { requiresVisitor: true }
+      },
+      {
+        path: 'change-password/:idUser',
+        name: 'ChangePassword',
+        component: ChangePassword,
         meta: { requiresVisitor: true }
       }
     ]
