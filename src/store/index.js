@@ -67,6 +67,7 @@ export default new Vuex.Store({
       state.schedule = []
       state.role = null
       state.userProfile = {}
+      state.detailTicket = {}
     }
   },
   actions: {
