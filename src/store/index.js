@@ -343,10 +343,10 @@ export default new Vuex.Store({
       return state.userProfile
     },
     isAdmin (state) {
-      if (state.role === 'Admin') {
-        return 'Admin'
+      if (state.role === 'admin') {
+        return 'admin'
       } else {
-        return 'Admin'
+        return 'admin'
       }
     },
     schedules (state) {
