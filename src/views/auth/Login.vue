@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <p class="forgot-password">Did you forgot your password?</p>
-                <p class="reset-password">Tap here for reset</p>
+                <router-link to="/auth/forgot-password" class="reset-password d-block text-center">Tap here for reset</router-link>
                 <hr>
                 <h5>or sign in with</h5>
                 <div class="button-group">
