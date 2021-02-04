@@ -1,22 +1,109 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import store from '../store/index'
+import Auth from '../views/auth/Auth.vue'
+import Login from '../views/auth/Login.vue'
+import Register from '../views/auth/Register.vue'
+import ForgotPassword from '../views/auth/ForgotPassword.vue'
+import ChangePassword from '../views/auth/ChangePassword.vue'
+import Main from '../views/main/Main.vue'
+import MyBooking from '../views/main/MyBooking.vue'
+import SearchResult from '../views/main/SearchResult.vue'
+import BookingDetail from '../views/main/BookingDetail.vue'
+import Profile from '../views/main/Profile.vue'
+import FlightDetail from '../views/main/FlightDetail.vue'
+import AddSchedule from '../views/main/AddSchedule.vue'
+import History from '../views/main/History.vue'
+import LandingPage from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'LandingPage',
+    component: LandingPage,
+    meta: { requiresVisitor: true }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/auth',
+    name: 'Auth',
+    component: Auth,
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: Login,
+        meta: { requiresVisitor: true }
+      },
+      {
+        path: 'register',
+        name: 'Register',
+        component: Register,
+        meta: { requiresVisitor: true }
+      },
+      {
+        path: 'forgot-password',
+        name: 'ForgotPassword',
+        component: ForgotPassword,
+        meta: { requiresVisitor: true }
+      },
+      {
+        path: 'change-password/:idUser',
+        name: 'ChangePassword',
+        component: ChangePassword,
+        meta: { requiresVisitor: true }
+      }
+    ]
+  },
+  {
+    path: '/main',
+    name: 'Main',
+    component: Main,
+    children: [
+      {
+        path: 'search-result',
+        name: 'SearchResult',
+        component: SearchResult,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'booking-detail/:ticketId',
+        name: 'BookingDetail',
+        component: BookingDetail,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'admin/add-schedule',
+        name: 'AddSchedule',
+        component: AddSchedule,
+        meta: { requiresAuth: true, requiresAdmin: true }
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Profile,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'my-booking',
+        name: 'MyBooking',
+        component: MyBooking,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'flight-detail/:idschedule',
+        name: 'FlightDetail',
+        component: FlightDetail,
+        meta: { requiresAuth: true }
+      },
+      {
+        path: 'history',
+        name: 'History',
+        component: History,
+        meta: { requiresAuth: true }
+      }
+    ]
   }
 ]
 
@@ -24,6 +111,40 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/auth/login'
+      })
+    } else {
+      const role = localStorage.getItem('role')
+      console.log('isi role', role)
+      if (to.matched.some(record => record.meta.requiresAdmin)) {
+        if (role === 'admin') {
+          next()
+        } else {
+          next({
+            path: '/main/profile'
+          })
+        }
+      } else {
+        next()
+      }
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (store.getters.isLogin) {
+      next({
+        path: '/main/profile'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
