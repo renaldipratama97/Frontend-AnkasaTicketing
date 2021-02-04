@@ -138,6 +138,7 @@ export default new Vuex.Store({
             })
           })
           .catch(err => {
+            console.log(err.response)
             Swal.fire({
               icon: 'error',
               title: 'Failed to update picture',
