@@ -13,7 +13,7 @@ npm install
 VUE_APP_URL_BACKEND = http://localhost:5000/api
 ```
 # Screenshots
-<div display="flex">
+<div display="flex" align="center">
 <img src="https://user-images.githubusercontent.com/26200397/104165116-882e6180-542b-11eb-97db-0a2055bc234b.png" width="300">
 <img src="https://user-images.githubusercontent.com/26200397/104165121-895f8e80-542b-11eb-9bd4-879b0cf29399.png" width="300">
 <img src="https://user-images.githubusercontent.com/26200397/104165130-8bc1e880-542b-11eb-94ad-0f975da71d22.png" width="300">
