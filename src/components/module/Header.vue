@@ -32,8 +32,8 @@
                 <router-link to="/main/admin/add-schedule" id="mybookings" :class="userProfile.role === isAdmin ? 'user' : 'admin'"><span>Add Schedule</span></router-link>
                 <a id="messages" v-if="isLogin" class="messages" href="#"><span>Message</span></a>
                 <a id="notification" v-if="isLogin" class="notification" href="#"><span>Notification</span></a>
-                <div class="button" v-if="!isLogin">
-                    <button type="submit" class="btn btn-signup" @click="goSignUp">Sign Up</button>
+                <div class="button" v-if="!isLogin" @click="goSignUp">
+                    <span>Sign Up</span>
                 </div>
             </Slide>
             </div>
@@ -231,7 +231,7 @@ button:focus {
     .slide {
         display: flex;
     }
-    .button {
+    button {
         display: none;
     }
 }
@@ -254,6 +254,20 @@ button:focus {
         position: absolute;
         top: 5px;
         right: 0px;
+    }
+    button {
+        display: block;
+    }
+    #bm-burger-button .button button {
+        background: #2395FF;
+        box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #FFFFFF !important;
+        width: 150px;
+        height: 50px;
     }
 }
 
