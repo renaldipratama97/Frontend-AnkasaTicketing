@@ -18,7 +18,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/explore',
+    path: '/',
     name: 'LandingPage',
     component: LandingPage,
     meta: { requiresAuth: false }

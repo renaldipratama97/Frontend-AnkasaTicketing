@@ -404,6 +404,10 @@ main .box-search .destination-country {
 
 main .box-search .destination-country img {
   margin-left: 80px;
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  margin-top: 40px;
 }
 
 main .box-search .destination-country .from,
@@ -511,6 +515,10 @@ main .box-search .how-many .box-person .adult h6 {
 
 main .box-search .departure .box-date img {
   margin-left: 120px;
+  width: 20px;
+  height: 20px;
+  margin-top: 18px;
+  object-fit: cover;
 }
 
 main .box-search .how-many .box-person {
@@ -535,6 +543,10 @@ main .box-search .how-many .box-person .adult {
 main .box-search .how-many .box-person .child img,
 main .box-search .how-many .box-person .adult img {
   margin-left: 50px;
+  width: 20px;
+  height: 20px;
+  margin-top: 18px;
+  object-fit: cover;
 }
 
 main .box-search .class-airline {
@@ -741,6 +753,14 @@ main section.top-destination .box-top-destination {
   main section .box-ops {
     margin-left: 80px;
   }
+
+  main .box-search .destination-country {
+    width: 280px;
+  }
+
+  main .box-search .destination-country img {
+    margin-left: 50px;
+  }
 }
 
 @media (max-width: 988px) {
@@ -752,6 +772,12 @@ main section.top-destination .box-top-destination {
 @media (max-width: 943px) {
   main .half-image .oval {
     margin-left: 150px;
+  }
+}
+
+@media (max-width: 874px) {
+  .thumbnails {
+    width: 500px;
   }
 }
 
@@ -937,6 +963,26 @@ main section.top-destination .box-top-destination {
 
   main section .box-ops {
     margin-left: 10px;
+  }
+
+  main section.top-destination img {
+    top: 347px;
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 436px) {
+  main .box-search {
+    top: 450px;
+  }
+
+  main .half-image .oval {
+    margin-left: -150px;
+  }
+
+  main .box-search .departure .box-date {
+    width: 300px;
   }
 }
 
